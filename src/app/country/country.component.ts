@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from './country.model'
-import {CountryData} from '../services/country-data.service'
+import { Http, Response } from '@angular/http';
+import { HttpCountryService } from '../services/http.country.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.css'],
-  providers: [CountryData]
+  providers: [HttpCountryService]
 })
 export class CountryComponent implements OnInit {
 
-  countries: Country[];
+  countries: Object[];
+  country: Country;   
 
-  constructor(private countriesData: CountryData) { }
+  constructor(private httpCountryService: HttpCountryService) { }
 
-  /*constructor() {
-  
-    this.countries = [
-        new Country(1, "Srbija", "SRB"),
-         new Country(1, "Hrvatska", "HR")
-    ]
-  }*/
 
-  ngOnInit() {
-      this.countries = this.countriesData.fetchData();
-  }
+   ngOnInit() {
+    this.httpCountryService.getCountries().subscribe(
+      (at: any) => {this.countries = at; console.log(this.countries)},//You can set the type to Product.
+      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    );
+    }
 
-  addCountry(newCountry: Country) : void{
-      this.countries.push(newCountry);
-  }
+  addCountry(newCountry: Country, form: NgForm) : void{
+      this.httpCountryService.postCountry(newCountry).subscribe(this.onPost);
+      form.reset();
+    }    
+
+  onPost(res : any) : void{
+      alert("Post!");
+      console.log(res.json());
+    }
 
   clicked(country: Country): void {
     alert(country.Name);
