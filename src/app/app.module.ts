@@ -18,6 +18,9 @@ import { RoomComponent } from './room/room.component';
 import { RoomReservationComponent } from './room-reservation/room-reservation.component';
 import { AppUserComponent } from './app-user/app-user.component'
 
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+
 const ChildRoutes = [
    {path: "country", component: CountryComponent},
    {path: "accTypes", component: AccomodationTypeComponent},
@@ -26,6 +29,8 @@ const ChildRoutes = [
 const Routes = [
  // { path: '', redirectTo: '/home', pathMatch: 'full'},  //ako je prazno, redirectuj na home
   { path: "home", component: HomeComponent, children: ChildRoutes},
+  { path: "login", component: LoginComponent},
+  { path: "register", component: RegisterComponent},
 ]
 
 @NgModule({
@@ -40,7 +45,9 @@ const Routes = [
     RegionComponent,
     RoomComponent,
     RoomReservationComponent,
-    AppUserComponent
+    AppUserComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
