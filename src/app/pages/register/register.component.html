@@ -4,11 +4,16 @@
 <div>
       <label for="Username">Username</label>
       <input type="text" name="Username" ngModel>
+      <label for="Lastname">Lastname</label>
+      <input type="text" name="Lastname" ngModel>
       <label for="Email">Email</label>
       <input type="text" name="Email" ngModel>
       <label for="Password">Password</label>
-      <input type="text" name="Password" ngModel>  
-</div>   
+      <input type="password" name="Password" ngModel> 
+      <label for="ConfirmPassword">Confirm password</label>
+      <input type="password" name="ConfirmPassword" ngModel> 
+      <label><input type="checkbox" (change)="chk($event)"/> Manager?</label>
+</div>
   
 <input type="submit"/>
 </form>
