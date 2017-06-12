@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { LoginModel } from './login.model';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+
 import {
   Router,
   ActivatedRoute
@@ -11,29 +13,42 @@ import {
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ AuthService ]
+  providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
+  model: any = {};
+ 
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private http: Http
+  ) { }
 
- constructor(private authService: AuthService){
-
- }
-  
-  logIn(loginUser: LoginModel, form: NgForm) : void{
-      this.authService.logIn(loginUser).subscribe(this.onLogin);
+  logIn(loginUser: LoginModel, form: NgForm): void {
+    this.authService.logIn(loginUser).subscribe(this.onLogin,
+      error => {
+        alert(error.text());
+        console.log(error.text());
+      });
     form.reset();
   }
 
-  onLogin(){
-    
-   alert("Uspesno logovan!");
- }
+  onLogin(response: any) {
 
-  logOut(){
+
+    localStorage.setItem('token_id', response.json().access_token);
+    localStorage.setItem('role', response.headers.get('Role'));
+
+    console.log(response.json());
+    //this.router.navigate([`/home`]);
+
+  }
+
+  logOut() {
     this.authService.logOut();
   }
 
-  isLoggedIn() : boolean{
+  isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 

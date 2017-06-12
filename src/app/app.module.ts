@@ -16,14 +16,16 @@ import { PlaceComponent } from './place/place.component';
 import { RegionComponent } from './region/region.component';
 import { RoomComponent } from './room/room.component';
 import { RoomReservationComponent } from './room-reservation/room-reservation.component';
-import { AppUserComponent } from './app-user/app-user.component'
+import { AppUserComponent } from './app-user/app-user.component';
 
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { Comment } from './comment/comment.model';
 
 const ChildRoutes = [
    {path: "country", component: CountryComponent},
    {path: "accTypes", component: AccomodationTypeComponent},
+   {path: "appUser", component: AppUserComponent},
   ]
 
 const Routes = [

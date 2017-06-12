@@ -1,19 +1,28 @@
-<h1>Register</h1>
-<form #f="ngForm" (ngSubmit)="register(f.value, f)">
-     
-<div>
-      <label for="Username">Username</label>
-      <input type="text" name="Username" ngModel>
-      <label for="Lastname">Lastname</label>
-      <input type="text" name="Lastname" ngModel>
-      <label for="Email">Email</label>
-      <input type="text" name="Email" ngModel>
-      <label for="Password">Password</label>
-      <input type="password" name="Password" ngModel> 
-      <label for="ConfirmPassword">Confirm password</label>
-      <input type="password" name="ConfirmPassword" ngModel> 
-      <label><input type="checkbox" (change)="chk($event)"/> Manager?</label>
-</div>
-  
-<input type="submit"/>
+<form class="container" #f="ngForm" (ngSubmit)="register(f.value, f)">
+    <div class="form-group">
+        <label for="Username">Username</label>
+        <input type="text" class="form-control" name="Username" placeholder="Username" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="Lastname">Lastname</label>
+        <input type="text" class="form-control" name="Lastname" placeholder="Lastname" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" name="Password" placeholder="Password" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" name="Email" placeholder="e-mail" ngModel>
+    </div>
+
+    <div class="form-group">
+        <label for="ConfirmPassword">Confirm password</label>
+        <input type="password" class="form-control" name="ConfirmPassword" ngModel>
+    </div>
+    <div>
+        <label><input type="checkbox" (change)="chk($event)"/> Manager?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
