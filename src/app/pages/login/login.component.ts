@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { LoginModel } from './login.model';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { AdminComponent } from '../admin/admin.component';
 
 import {
   Router,
@@ -31,6 +32,11 @@ export class LoginComponent implements OnInit {
         console.log(error.text());
       });
     form.reset();
+    
+    if(localStorage.getItem("role")=="Admin")
+    {
+       this.router.navigate(['/admin']);
+    }
   }
 
   onLogin(response: any) {
@@ -40,6 +46,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('role', response.headers.get('Role'));
 
     console.log(response.json());
+
     //this.router.navigate([`/home`]);
 
   }

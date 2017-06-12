@@ -21,6 +21,7 @@ import { AppUserComponent } from './app-user/app-user.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { Comment } from './comment/comment.model';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -33,6 +34,16 @@ const Routes = [
   { path: "home", component: HomeComponent, children: ChildRoutes},
   { path: "login", component: LoginComponent},
   { path: "register", component: RegisterComponent},
+  { path: "admin", component: AdminComponent},
+  { path: "countries", component: CountryComponent},
+  { path: "places", component: PlaceComponent},
+  { path: "accTypes", component: AccomodationTypeComponent},
+  { path: "acc", component: AccomodationComponent},
+  { path: "comments", component: CommentComponent},
+  { path: "regions", component: RegionComponent},
+  { path: "appUsers", component: AppUserComponent},
+  { path: "rooms", component: RoomComponent},
+  { path: "roomReservations", component: RoomReservationComponent},
 ]
 
 @NgModule({
@@ -49,7 +60,8 @@ const Routes = [
     RoomReservationComponent,
     AppUserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
