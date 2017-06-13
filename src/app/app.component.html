@@ -1,14 +1,27 @@
 <nav class="navbar navbar-toggleable-md fixed-top navbar-dark bg-inverse">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".dual-collapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+
     <div class="navbar-collapse collapse dual-collapse">
-        <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item active">
-                <a class="nav-link" href="#">Link</a>
-            </li>-->
-        </ul>
+
         <a class="navbar-brand d-flex mx-auto" routerLink="home">Home</a>
+
+        <div class="container-fluid">
+            <div class="dropdown">
+                <a class="navbar-brand d-flex mx-auto" href="#entities" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Entities
+                </a>
+                <div class="dropdown-menu" aria-labelledby="Entities">
+                    <a class="dropdown-item" [routerLink]="['/acc']">Accomodation</a>
+                    <a class="dropdown-item" [routerLink]="['/accTypes']">Accomodation types</a>
+                    <a class="dropdown-item" [routerLink]="['/users']">Users</a>
+                    <a class="dropdown-item" [routerLink]="['/comments']">Comments</a>
+                    <a class="dropdown-item" [routerLink]="['/countries']">Countries</a>
+                    <a class="dropdown-item" [routerLink]="['/places']">Places</a>
+                    <a class="dropdown-item" [routerLink]="['/regions']">Regions</a>
+                    <a class="dropdown-item" [routerLink]="['/rooms']">Rooms</a>
+                    <a class="dropdown-item" [routerLink]="['/roomReservations']">Room Reservations</a>
+                </div>
+            </div>
+        </div>
 
         <div class="navbar-collapse collapse dual-collapse">
             <ul class="navbar-nav ml-auto">

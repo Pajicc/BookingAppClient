@@ -23,15 +23,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { Comment } from './comment/comment.model';
 import { AdminComponent } from './pages/admin/admin.component';
 
-const ChildRoutes = [
+/*const ChildRoutes = [
    {path: "country", component: CountryComponent},
    {path: "accTypes", component: AccomodationTypeComponent},
    {path: "appUser", component: AppUserComponent},
-  ]
+   {path: "appUser", component: AppUserComponent},
+   {path: "appUser", component: AppUserComponent},
+]*/
 
 const Routes = [
  // { path: '', redirectTo: '/home', pathMatch: 'full'},  //ako je prazno, redirectuj na home
-  { path: "home", component: HomeComponent, children: ChildRoutes},
+  { path: "home", component: HomeComponent},
   { path: "login", component: LoginComponent},
   { path: "register", component: RegisterComponent},
   { path: "admin", component: AdminComponent},

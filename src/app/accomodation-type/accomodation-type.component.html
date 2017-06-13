@@ -1,18 +1,36 @@
-<h3>Add Accomodation type</h3>
-<div>
-  <ul>
-    <li *ngFor="let accType of accTypes">{{accType.Name}}</li>
-  </ul>
-</div>
+<nav class="navbar navbar-default">
 
-<form #f="ngForm" (ngSubmit)="addAccType(f.value, f)">
-     
-<div>
-      <label for="Name">Name</label>
-      <input type="text" name="Name" ngModel>
-    
-</div>   
-  
-<input type="submit"/>
-</form>
+    <div class="container-fluid">
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAccType" aria-expanded="false" aria-controls="addAccType">
+           Add Accomodation type
+        </button><br><br>
+    </div>
+    <div class="container-fluid">
+        <div class="collapse" id="addAccType">
+            <form class="container" #f="ngForm" (ngSubmit)="addAccType(f.value, f)">
 
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input type="text" class="form-control" name="Name" placeholder="Name" ngModel>
+                </div>
+
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+    </div> <br><br>
+
+    <div class="container-fluid">
+        <h3>Accomodation types</h3>
+        <ul class="list-inline center-block align-items-center">
+            <li *ngFor="let accType of accTypes" class="text-left ">{{accType.Name}}
+                <a (click)="deleteAccType()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pull-right">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+                <a (click)="editAccType()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pull-right">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+                <br>
+            </li>
+        </ul>
+    </div>
+</nav>

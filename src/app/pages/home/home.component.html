@@ -1,9 +1,32 @@
-<ol>
-    <li><a [routerLink]="['/home/country']">Country</a></li>
-    <li><a [routerLink]="['/home/accTypes']">Accomodation types</a></li>
-    <li>
-        <a [routerLink]="['/home/appUser']">App user</a>
-    </li>
-</ol>
+<nav class="navbar navbar-toggleable-md">
+    <div class="container-fluid">
+
+        <div class="navbar-collapse collapse dual-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li><a class="nav-item" class="nav-link" [routerLink]="['/acc']">Accomodations </a></li>
+                <li><a class="nav-item" class="nav-link" [routerLink]="['/login']">Accomodation types</a></li>
+            </ul>
+            <!--<ul class="nav nav-pills">
+
+                <li class="nav-item">
+                    <a class="nav-link active" [routerLink]="['/acc']">Accomodations</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accomodation types</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Users</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Comments</a>
+                </li>
+
+            </ul>-->
+        </div>
+    </div>
+</nav>
 
 <router-outlet></router-outlet>

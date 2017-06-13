@@ -20,18 +20,30 @@ export class AccomodationTypeComponent implements OnInit {
 
   ngOnInit() {
     this.httpAccTypeService.getAccTypes().subscribe(
-      (at: any) => {this.accTypes = at; console.log(this.accTypes)},//You can set the type to Product.
+      (at: any) => {this.accTypes = at; console.log(this.accTypes) },
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
     }
 
   addAccType(newAccType: AccType, form: NgForm) : void{
-      this.httpAccTypeService.postAccType(newAccType).subscribe(this.onPost);
+      this.httpAccTypeService.postAccType(newAccType).subscribe(
+        (at: any) => {this.ngOnInit() },
+         error => {alert("Unsuccessful added accomodation type!"); console.log(error);}
+      );
       form.reset();
+     
     }    
 
   onPost(res : any) : void{
       alert("Post!");
       console.log(res.json());
+    }
+
+    deleteAccType(accTypeName: string) : void{
+      alert("Delete invoked!"+accTypeName);
+    }
+
+    editAccType(accTypeName: string) : void{
+      alert("Edit invoked!"+accTypeName);
     }
   }

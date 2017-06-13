@@ -20,8 +20,18 @@
         <label for="ConfirmPassword">Confirm password</label>
         <input type="password" class="form-control" name="ConfirmPassword" ngModel>
     </div>
-    <div>
-        <label><input type="checkbox" (change)="chk($event)"/> Manager?</label>
+    
+    <div class="container-fluid">           
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" (change)="chkManager($event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Manager</span>
+        </label>
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" (change)="chkUser($event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> User</span>
+        </label>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

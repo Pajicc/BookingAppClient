@@ -26,15 +26,26 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(regDTO).subscribe(x => console.log(x));
   }
 
-  chk(e) 
+  chkManager(e) 
   {
     if(e.target.checked)
     {
-      this.role = "Manager"
+      this.role = "Manager";
     }
     else
     {
-      this.role = "User"
+       this.role = "";
+    }
+  }
+   chkUser(e) 
+  {
+    if(e.target.checked)
+    {
+      this.role = "User";
+    }
+    else
+    {
+       this.role = "";
     }
   }
 }
