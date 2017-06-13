@@ -1,3 +1,26 @@
-<p>
-  room works!
-</p>
+<div>
+    <ul>
+        <li *ngFor="let room of rooms">{{room.RoomNumber}}</li>
+    </ul>
+</div>
+
+<form class="container" #f="ngForm" (ngSubmit)="addRoom(f.value, f)">
+
+    <div class="form-group">
+        <label for="RoomNumber">RoomNumber</label>
+        <input type="text" class="form-control" name="RoomNumber" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" name="Description" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="PricePerNight">PricePerNight</label>
+        <input type="text" class="form-control" name="PricePerNight" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="AccomodationId">AccomodationId</label>
+        <input type="text" class="form-control" name="AccomodationId" ngModel>
+    </div>
+    <input type="submit" />
+</form>

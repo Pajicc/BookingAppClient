@@ -1,9 +1,15 @@
 export class Place {
 
-    /*[StringLength(50)]*/
     public Name: string;
-    /*[ForeignKey("Region")]*/
+
     public RegionId: number;
-    //public Region: Region;
+
+    constructor(
+        Name:string,
+        RegionId: number
+    ){
+        this.Name = Name;
+        this.RegionId = RegionId;
+    }
     
 }

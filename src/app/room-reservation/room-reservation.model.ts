@@ -3,10 +3,20 @@ export class RoomReservations {
     public StartDate: Date;
     public EndDate: Date;
     public Timestamp: Date;
-    /*[ForeignKey("AppUser")]*/
     public AppUserId: number;
-    //public AppUser: AppUser;
-    /*[ForeignKey("Room")]*/
     public RoomId: number;
-    //public Room: Room;
+
+    constructor(
+       StartDate: Date,
+        EndDate: Date,
+        Timestamp: Date,
+        AppUserId: number,
+         RoomId: number
+    ){
+        this.StartDate = StartDate;
+        this.EndDate = EndDate;
+        this.Timestamp = Timestamp;
+        this.AppUserId = AppUserId;
+        this.RoomId = RoomId;
+    }
 }
