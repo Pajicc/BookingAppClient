@@ -1,8 +1,14 @@
 export class Region {
 
-    /*[StringLength(50)]*/
     public Name: string;    
-    /*[ForeignKey("Country")]*/
+ 
     public CountryId: number;
-    //public Country: Country;
+    
+    constructor(
+        Name:string,
+        CountryId:number
+    ){
+        this.Name = Name;
+        this.CountryId = CountryId;
+    }
 }

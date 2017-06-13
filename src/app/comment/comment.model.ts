@@ -1,12 +1,18 @@
 export class Comment {
-    
+
     public Grade: number;
-    /*[StringLength(50)]*/
     public Text: string;
-    /*[ForeignKey("Accomodation")]*/
     public AccomodationId: number;
-    //public Accomodation: Accomodation;
-    /*[ForeignKey("AppUsers")]*/
     public AppUsersId: number;
-    //public AppUsers: AppUser;
+
+    constructor(
+         Grade: number,
+         Text: string,
+         AccomodationId: number,
+         AppUsersId: number){
+             this.Grade = Grade;
+             this.Text = Text;
+             this.AccomodationId = AccomodationId;
+             this.AppUsersId = AppUsersId;
+         }
 }

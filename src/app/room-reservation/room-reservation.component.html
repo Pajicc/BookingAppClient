@@ -1,3 +1,28 @@
-<p>
-  room-reservation works!
-</p>
+<div>
+    <ul>
+        <li *ngFor="let roomRes of roomResss">{{roomRes.StartDate}}</li>
+    </ul>
+</div>
+<form class="container" #f="ngForm" (ngSubmit)="addRoomReservation(f.value, f)">
+    <div class="form-group">
+        <label for="StartDate">StartDate</label>
+        <input type="text" class="form-control" name="StartDate" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="EndDate">EndDate</label>
+        <input type="text" class="form-control" name="EndDate" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="Timestamp">Timestamp</label>
+        <input type="text" class="form-control" name="Timestamp" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="AppUserId">AppUserId</label>
+        <input type="text" class="form-control" name="AppUserId" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="RoomId">RoomId</label>
+        <input type="text" class="form-control" name="RoomId" ngModel>
+    </div>
+    <input type="submit" />
+</form>

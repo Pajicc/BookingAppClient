@@ -1,27 +1,48 @@
 //import { AccType } from '../accomodation-type/accomodation-type.model';
 
 export class Accomodation {
-    
-    /*[StringLength(50)]*/
+
     public Name: string;
-    /*[StringLength(50)]*/
+
     public Description: string;
-    /*[StringLength(50)]*/
+
     public Address: string;
     public AverageGrade: number;
     public Latitude: number;
     public Longtitude: number;
-    /*[StringLength(50)]*/
+
     public ImageURL: string;
     public Approved: boolean;
 
-    /*[ForeignKey("Place")]*/
     public PlaceId: number;
-    //public Place: Place;
-    /*[ForeignKey("AppUser")]*/
+
     public AppUserId: number;
-    //public AppUser: AppUser;
-    /*[ForeignKey("AccomodationType")]*/
+
     public AccomodationTypeId: number;
-    //public AccomodationType: AccType;
+
+    constructor(
+        Name:string,
+        Description:string,
+        Address: string,
+        AverageGrade: number,
+        Latitude: number,
+        Longtitude: number,
+        ImageURL: string,
+        Approved: boolean,
+        PlaceId: number,
+        AppUserId: number,
+        AccomodationTypeId: number
+    ){
+        this.Name = Name;
+        this.Description = Description;
+        this.Address = Address;
+        this.AverageGrade = AverageGrade;
+        this.Latitude = Latitude;
+        this.Longtitude = Longtitude;
+        this.ImageURL = ImageURL;
+        this.Approved = Approved;
+        this.PlaceId = PlaceId;
+        this.AppUserId = AppUserId;
+        this.AccomodationTypeId = AccomodationTypeId;
+    }
 }
