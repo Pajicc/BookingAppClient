@@ -12,22 +12,28 @@ import {NgForm} from '@angular/forms';
 })
 export class AccomodationTypeComponent implements OnInit {
 
-  accType: AccType;   //iz forme
+  accTypeName: string;   //za edit i delete
+  accType: AccType;   
   accTypes : Object []; //iz get metode - iz baze
-
+  id: number;
+ 
   constructor(private httpAccTypeService: HttpAccTypeService) { }
   
-
-  ngOnInit() {
-    this.httpAccTypeService.getAccTypes().subscribe(
+ getAll(){
+  this.httpAccTypeService.getAccTypes().subscribe(
       (at: any) => {this.accTypes = at; console.log(this.accTypes) },
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+ }
+
+
+  ngOnInit() {
+      this.getAll();
     }
 
-  addAccType(newAccType: AccType, form: NgForm) : void{
+  addAccType(newAccType: any, form: NgForm) : void{
       this.httpAccTypeService.postAccType(newAccType).subscribe(
-        (at: any) => {this.ngOnInit() },
+        (at: any) => {this.getAll() },
          error => {alert("Unsuccessful added accomodation type!"); console.log(error);}
       );
       form.reset();
@@ -39,11 +45,30 @@ export class AccomodationTypeComponent implements OnInit {
       console.log(res.json());
     }
 
-    deleteAccType(accTypeName: string) : void{
-      alert("Delete invoked!"+accTypeName);
+    deleteAccType() : void{
+       this.httpAccTypeService.deleteAccType(this.id).subscribe(
+        (at: any) => {this.getAll() },
+         error => {alert("Unsuccessful delete!"); console.log(error);}
+      );
     }
 
-    editAccType(accTypeName: string) : void{
-      alert("Edit invoked!"+accTypeName);
+    editAccType() : void{
+      this.httpAccTypeService.updateAccType(this.accType).subscribe(
+        (at: any) => {this.getAll() },
+         error => {alert("Unsuccessful edit!"); console.log(error);}
+      );
     }
+
+    setId(id: number){
+      this.id = id;
+    }
+
+    setAccType(accType: AccType){
+      this.accType = accType;
+    }
+
+    getById(){
+       this.httpAccTypeService.getById(this.id).subscribe(x =>  this.accType = x[0] as AccType);
+    }
+
   }

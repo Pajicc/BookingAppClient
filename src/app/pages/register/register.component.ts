@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
 
   role: string;
   isChecked : boolean;
+  toggledManager: boolean;
+  toggledUser: boolean;
 
   constructor(private registerService: RegisterService) { }
 
@@ -29,7 +31,7 @@ export class RegisterComponent implements OnInit {
   chkManager(e) 
   {
     if(e.target.checked)
-    {
+    { 
       this.role = "Manager";
     }
     else
@@ -37,11 +39,12 @@ export class RegisterComponent implements OnInit {
        this.role = "";
     }
   }
-   chkUser(e) 
+  
+  chkUser(e) 
   {
     if(e.target.checked)
-    {
-      this.role = "User";
+    {     
+      this.role = "AppUser";
     }
     else
     {

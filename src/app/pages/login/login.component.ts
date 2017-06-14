@@ -32,16 +32,15 @@ export class LoginComponent implements OnInit {
         console.log(error.text());
       });
     form.reset();
-    
+
     if(localStorage.getItem("role")=="Admin")
     {
        this.router.navigate(['/admin']);
-    }
+    } 
   }
 
   onLogin(response: any) {
-
-
+    
     localStorage.setItem('token_id', response.json().access_token);
     localStorage.setItem('role', response.headers.get('Role'));
 

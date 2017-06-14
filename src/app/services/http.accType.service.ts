@@ -8,8 +8,6 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpAccTypeService {
 
-    accType: AccType;
-
     constructor(private http: Http) {
 
     }
@@ -38,4 +36,35 @@ export class HttpAccTypeService {
                 Name: accType.Name
             }), opts);
     }
+
+    deleteAccType(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/AccomodationTypes/${id}`, opts);
+    }
+
+    updateAccType(accType: AccType) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/AccomodationTypes/${accType.Id}`,  
+       JSON.stringify(accType), opts);
+    }
+
+    getById(id: number) : Observable<any> {
+        
+        return this.http.get('http://localhost:54042/api/AccomodationTypes$(id)').map(this.extractData);
+    }
+    
 }
