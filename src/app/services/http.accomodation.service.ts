@@ -15,7 +15,7 @@ export class HttpAccomodationService{
     }
 
     getAccomodation():Observable<any>{
-        return this.http.get("hettp://localhost:54042/api/Accomodations").map(this.extractData);
+        return this.http.get("http://localhost:54042/api/Accomodations").map(this.extractData);
 
     }
 
@@ -40,8 +40,8 @@ export class HttpAccomodationService{
             Address: accom.Address, 
             AverageGrade: accom.AverageGrade,
             Latitude: accom.Latitude,
-            Longitude: accom.Longitude,
-            ImageUrl: accom.ImageUrl,
+            Longtitude: accom.Longtitude,
+            ImageURL: accom.ImageURL,
             Approved: accom.Approved,
             PlaceId: accom.PlaceId,
             AppUserId: accom.AppUserId,

@@ -2,6 +2,7 @@
 
 export class Accomodation {
 
+    public Id: number;
     public Name: string;
 
     public Description: string;
@@ -21,6 +22,7 @@ export class Accomodation {
     public AccomodationTypeId: number;
 
     constructor(
+        Id: number,
         Name:string,
         Description:string,
         Address: string,
@@ -33,6 +35,7 @@ export class Accomodation {
         AppUserId: number,
         AccomodationTypeId: number
     ){
+        this.Id = Id;
         this.Name = Name;
         this.Description = Description;
         this.Address = Address;

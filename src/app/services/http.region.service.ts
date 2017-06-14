@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Region } from '../region/region.model';
+import {Country } from '../country/country.model';
 
  import 'rxjs/add/operator/map';
 

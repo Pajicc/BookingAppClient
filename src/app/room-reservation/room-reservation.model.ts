@@ -1,5 +1,6 @@
 export class RoomReservations {
 
+    public Id: number;
     public StartDate: Date;
     public EndDate: Date;
     public Timestamp: Date;
@@ -7,12 +8,14 @@ export class RoomReservations {
     public RoomId: number;
 
     constructor(
-       StartDate: Date,
+        Id: number,
+        StartDate: Date,
         EndDate: Date,
         Timestamp: Date,
         AppUserId: number,
-         RoomId: number
-    ){
+        RoomId: number
+    ) {
+        this.Id = Id;
         this.StartDate = StartDate;
         this.EndDate = EndDate;
         this.Timestamp = Timestamp;

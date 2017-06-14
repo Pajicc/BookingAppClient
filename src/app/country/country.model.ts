@@ -2,14 +2,17 @@
  * Provides a `Country` object
  */
 export class Country {
-    Name: String;
-    Code: String;
+  Id: number;
+  Name: String;
+  Code: String;
 
   constructor(
-     Name: string,
-     Code: string) {
+    Id: number,
+    Name: string,
+    Code: string) {
 
-         this.Name = Name;
-         this.Code = Code;
+    this.Id = Id;
+    this.Name = Name;
+    this.Code = Code;
   }
 }

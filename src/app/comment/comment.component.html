@@ -1,9 +1,3 @@
-<div>
-    <ul>
-        <li *ngFor="let comment of comments">{{comment.Grade}}</li>
-    </ul>
-</div>
-
 <form class="container" #f="ngForm" (ngSubmit)="addComment(f.value, f)">
 
     <div class="form-group">
@@ -24,3 +18,12 @@
     </div>
     <input type="submit" />
 </form>
+<br>
+<br>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let comment of comments">
+            <p> Grade: {{comment.Grade}}, <br> Comment: {{comment.Text}}</p>
+        </li>
+    </ul>
+</div>

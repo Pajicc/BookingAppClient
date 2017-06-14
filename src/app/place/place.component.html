@@ -1,17 +1,18 @@
-<div>
-    <ul>
-        <li *ngFor="let place of places">{{place.Name}}</li>
-    </ul>
-</div>
-
 <form class="container" #f="ngForm" (ngSubmit)="addPlace(f.value, f)">
     <div class="form-group">
-        <label for="Name">Name</label>
+        <label for="Name">name:</label>
         <input type="text" class="form-control" name="Name" ngModel>
     </div>
     <div class="form-group">
-        <label for="RegionId">RegionId</label>
+        <label for="RegionId">region:</label>
         <input type="text" class="form-control" name="RegionId" ngModel>
     </div>
-    <input type="submit" />
+    <button type="submit" class="btn btn-info">Submit</button>
 </form>
+<br>
+<br>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let place of places">{{place.Name}}</li>
+    </ul>
+</div>

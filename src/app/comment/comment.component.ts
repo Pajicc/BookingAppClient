@@ -25,9 +25,13 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(newComment: Comment, form: NgForm): void {
-    this.httpCommentService.postComment(newComment).subscribe(this.onPost);
+    this.httpCommentService.postComment(newComment).subscribe(
+      (co: any) => {this.ngOnInit() },
+      error => { alert("Unsuccessful insert operation!"); console.log(error);}
+    );
     form.reset();
   }
+  
   onPost(res: any): void {
     alert("Post!");
     console.log(res.json());

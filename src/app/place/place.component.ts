@@ -25,7 +25,10 @@ export class PlaceComponent implements OnInit {
   }
 
   addPlace(newPlace: Place, form: NgForm): void {
-    this.httpPlaceService.postPlace(newPlace).subscribe(this.onPost);
+    this.httpPlaceService.postPlace(newPlace).subscribe(
+      (co: any) => {this.ngOnInit() },
+      error => { alert("Unsuccessful insert operation!"); console.log(error);}
+    );
     form.reset();
   }
   onPost(res: any): void {

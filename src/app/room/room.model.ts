@@ -1,5 +1,6 @@
 export class Room {
 
+    public Id: number;
     public RoomNumber: number;
     public BedCount: number;
     public Description: string;
@@ -7,12 +8,14 @@ export class Room {
     public AccomodationId: number;
 
     constructor(
+         Id : number,
          RoomNumber: number,
          BedCount: number,
          Description: string,
          PricePerNight: number,
          AccomodationId: number
     ){
+        this.Id = Id;
         this.RoomNumber = RoomNumber;
         this.BedCount = BedCount;
         this.Description = Description;

@@ -23,7 +23,10 @@ export class RoomReservationComponent implements OnInit {
   }
 
   addRoomReservations(newRoomRes: RoomReservations, form: NgForm): void {
-    this.httpRoomReservationService.postRoomReservations(newRoomRes).subscribe(this.onPost);
+    this.httpRoomReservationService.postRoomReservations(newRoomRes).subscribe(
+      (co: any) => {this.ngOnInit() },
+      error => { alert("Unsuccessful insert operation!"); console.log(error);}
+    );
     form.reset();
   }
   onPost(res: any): void {

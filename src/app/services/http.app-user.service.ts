@@ -33,7 +33,9 @@ export class HttpAppUserService{
         return this.http.post(
             'http://localhost:54042/api/AppUser',
             JSON.stringify({
-                    Userame: appUser.Username
+                    Userame: appUser.Username,
+                    Password: appUser.Password,
+                    Email: appUser.Email
             }),opts);
     }
 }

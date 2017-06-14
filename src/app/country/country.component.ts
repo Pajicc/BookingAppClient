@@ -26,7 +26,10 @@ export class CountryComponent implements OnInit {
     }
 
   addCountry(newCountry: Country, form: NgForm) : void{
-      this.httpCountryService.postCountry(newCountry).subscribe(this.onPost);
+      this.httpCountryService.postCountry(newCountry).subscribe(
+        (co: any) => {this.ngOnInit() },
+      error => { alert("Unsuccessful insert operation!"); console.log(error);}
+      );
       form.reset();
     }    
 
