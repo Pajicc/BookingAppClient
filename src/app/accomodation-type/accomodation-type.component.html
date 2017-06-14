@@ -1,12 +1,12 @@
 <nav class="navbar navbar-default">
 
     <div class="container-fluid">
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAccType" aria-expanded="false" aria-controls="addAccType">
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAccTypeCollapse" aria-expanded="false" aria-controls="addAccTypeCollapse">
            Add Accomodation type
         </button><br><br>
     </div>
-    <div class="container-fluid">
-        <div class="">
+    <div class="collapse" id="addAccTypeCollapse">
+        <div class="card card-block">
             <form class="container" #f="ngForm" (ngSubmit)="addAccType(f.value, f)">
 
                 <div class="form-group">
@@ -21,6 +21,7 @@
 
     <div class="container-fluid">
         <h3>Accomodation types</h3>
+         <div class="card card-block">
         <ul class="list-inline center-block align-items-center">
             <li *ngFor="let accType of accTypes" class="text-left ">{{accType.Name}}, {{accType.Id}}
                 <a role="button" (click)="setId(accType.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delAccTypeModal" aria-expanded="false" class="pull-right">
@@ -32,6 +33,7 @@
                 <br>
             </li>
         </ul>
+         </div>
     </div>
 </nav>
 

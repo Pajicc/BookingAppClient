@@ -20,8 +20,19 @@
         <label for="ConfirmPassword">Confirm password</label>
         <input type="password" class="form-control" name="ConfirmPassword" ngModel>
     </div>
-    
-    <div class="container-fluid">           
+    <div class="form-check">
+        <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadio1"  (change)="chkManager($event)" checked>
+        Manager
+        </label>
+    </div>
+    <div class="form-check">
+        <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadio2"(change)="chkUser($event)">
+        User
+        </label>
+    </div>
+    <!--<div class="container-fluid">           
         <label class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" (change)="chkManager($event)">
             <span class="custom-control-indicator"></span>
@@ -32,7 +43,7 @@
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> User</span>
         </label>
-    </div>
+    </div>-->
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

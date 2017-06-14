@@ -9,6 +9,7 @@ import { AccType } from "../accomodation-type/accomodation-type.model";
 import { HttpPlaceService } from "../services/http.place.servise";
 import { HttpAppUserService } from "../services/http.app-user.service";
 import { HttpAccTypeService } from "../services/http.accType.service";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-accomodation',
@@ -18,7 +19,8 @@ import { HttpAccTypeService } from "../services/http.accType.service";
     HttpAccomodationService,
     HttpPlaceService,
     HttpAppUserService,
-    HttpAccTypeService
+    HttpAccTypeService,
+    AuthService
     ]
 })
 export class AccomodationComponent implements OnInit {
@@ -33,13 +35,22 @@ export class AccomodationComponent implements OnInit {
   accType: AccType;
   accTypes: Object[];
 
+  id: number;
+  accName: string; 
+  show: boolean;
+
   constructor(
     private httpAccomodationService: HttpAccomodationService,
     private httpPlaceService: HttpPlaceService,
     private httpAppUserService: HttpAppUserService,
-    private httpAccTypeService: HttpAccTypeService) { }
+    private httpAccTypeService: HttpAccTypeService,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    this.getAll();
+  }
+
+  getAll(){
     this.httpAccomodationService.getAccomodation().subscribe(
       (am: any) => { this.accoms = am; console.log(this.accoms) },
       error => { alert("Unsuccessful accomodation fetch operation!"); console.log(error); }
@@ -58,16 +69,34 @@ export class AccomodationComponent implements OnInit {
   addAccomodation(newAccom: Accomodation,  form: NgForm): void {
     newAccom.Approved = this.approved;
     this.httpAccomodationService.postAccomodation(newAccom).subscribe(
-      (co:any) => {this.ngOnInit()},
+      (co:any) => {this.getAll()},
       error => { alert("Unsuccessful insert operation!"); console.log(error);}
     );
     form.reset();
   }
 
-  onPost(res: any): void {
-    alert("Post!");
-    console.log(res.json());
-  }
+   deleteAcc() : void{
+       this.httpAccomodationService.deleteAccomodation(this.id).subscribe(
+        (at: any) => {this.getAll() },
+         error => {alert("Unsuccessful delete!"); console.log(error);}
+      );
+    }
+
+    editAcc() : void{
+      this.httpAccomodationService.updateAccomodation(this.accom).subscribe(
+        (at: any) => {this.getAll() },
+         error => {alert("Unsuccessful edit!"); console.log(error);}
+      );
+    }
+
+    setId(id: number){
+      this.id = id;
+    }
+
+    setAcc(acc: Accomodation){
+      this.accom = acc;
+    }
+
 
   chk(e) {
     if (e.target.checked) {
@@ -77,4 +106,12 @@ export class AccomodationComponent implements OnInit {
       this.approved = false
     }
   }
+
+  /*showAdd(): boolean{
+    if(parseInt(localStorage.getItem('appUserID'))==this.accom.AppUserId)
+    {
+      this.show=true;   //ako je manager i ako je njegov smestaj
+    }
+    return (this.authService.isUserManager && (this.show));
+  }*/
 }

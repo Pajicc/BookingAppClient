@@ -40,11 +40,6 @@ export class AccomodationTypeComponent implements OnInit {
      
     }    
 
-  onPost(res : any) : void{
-      alert("Post!");
-      console.log(res.json());
-    }
-
     deleteAccType() : void{
        this.httpAccTypeService.deleteAccType(this.id).subscribe(
         (at: any) => {this.getAll() },

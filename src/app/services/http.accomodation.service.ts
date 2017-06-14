@@ -48,4 +48,29 @@ export class HttpAccomodationService{
             AccomodationTypeId: accom.AccomodationTypeId
         }), opts);
     }
+
+    deleteAccomodation(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/Accomodations/${id}`, opts);
+    }
+
+    updateAccomodation(acc: Accomodation) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/Accomodations/${acc.Id}`,  
+       JSON.stringify(acc), opts);
+    }
 }

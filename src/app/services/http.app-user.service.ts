@@ -26,6 +26,7 @@ export class HttpAppUserService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
+       // headers.append('Authorization', 'Bearer ' + localStorage.getItem('Role'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;

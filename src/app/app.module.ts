@@ -22,6 +22,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { Comment } from './comment/comment.model';
 import { AdminComponent } from './pages/admin/admin.component';
+import { LogoutComponent } from './logout/logout.component';
+import { AccomodationListComponent } from './accomodation-list/accomodation-list.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -63,7 +65,9 @@ const Routes = [
     AppUserComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    LogoutComponent,
+    AccomodationListComponent
   ],
   imports: [
     BrowserModule,

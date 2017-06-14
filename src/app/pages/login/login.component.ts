@@ -26,29 +26,30 @@ export class LoginComponent implements OnInit {
   ) { }
 
   logIn(loginUser: LoginModel, form: NgForm): void {
-    this.authService.logIn(loginUser).subscribe(this.onLogin,
-      error => {
-        alert(error.text());
-        console.log(error.text());
-      });
-    form.reset();
-
-    if(localStorage.getItem("role")=="Admin")
+    this.authService.logIn(loginUser).subscribe(x => { 
+      this.onLogin(x); 
+      this.router.navigate(['/home']); },
+       x => alert('Failed to login!'));
+       
+    /*if(localStorage.getItem("role")=="Admin")
     {
        this.router.navigate(['/admin']);
-    } 
+    } */
   }
 
-  onLogin(response: any) {
-    
-    localStorage.setItem('token_id', response.json().access_token);
-    localStorage.setItem('role', response.headers.get('Role'));
+ onLogin(response: Response) : void {
 
-    console.log(response.json());
-
-    //this.router.navigate([`/home`]);
-
-  }
+        let response_json = response.json();
+        let access_token = response_json['access_token'];
+        console.log(access_token);      
+        let role = response.headers.get('Role');
+        console.log(role);
+        let appUserID = response.headers.get('appUserID');
+        console.log(appUserID);
+        localStorage.setItem('token',access_token);
+        localStorage.setItem('role',role);      
+        localStorage.setItem('appUserID',appUserID);     
+    }
 
   logOut() {
     this.authService.logOut();
