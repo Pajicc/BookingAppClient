@@ -6,7 +6,7 @@
         </button><br><br>
     </div>
     <div class="container-fluid">
-        <div class="collapse" id="addAccType">
+        <div class="">
             <form class="container" #f="ngForm" (ngSubmit)="addAccType(f.value, f)">
 
                 <div class="form-group">
@@ -22,11 +22,11 @@
     <div class="container-fluid">
         <h3>Accomodation types</h3>
         <ul class="list-inline center-block align-items-center">
-            <li *ngFor="let accType of accTypes" class="text-left ">{{accType.Name}}
-                <a (click)="deleteAccType()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pull-right">
+            <li *ngFor="let accType of accTypes" class="text-left ">{{accType.Name}}, {{accType.Id}}
+                <a role="button" (click)="setId(accType.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delAccTypeModal" aria-expanded="false" class="pull-right">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
-                <a (click)="editAccType()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="pull-right">
+                <a  role="button" (click)="setAccType(accType)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editAccTypeModal" class="pull-right">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
                 <br>
@@ -34,3 +34,49 @@
         </ul>
     </div>
 </nav>
+
+<!-- Delete accType modal -->
+
+<div class="modal fade" id="delAccTypeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this Accomodation Type?
+            </div>
+                <button type="button" class="btn btn-primary" (click)="deleteAccType()" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>              
+        </div>
+    </div>
+</div>
+
+<!-- Edit accType modal -->
+
+<div class="modal fade" id="editAccTypeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Edit</h4>
+            </div>
+            <div class="modal-body">
+           <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAccType(f1.value, f1)"> -->
+                    <div *ngIf="accType != null">
+                        <label for="Name">Name: </label>
+                        <input type = "text" name ="Name" id="Name" [(ngModel)]="accType.Name"/>
+                    </div><br>
+
+                    <button type="submit" (click)="editAccType()" class="btn btn-primary" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+             <!--    </form> -->
+            </div>          
+        </div>
+    </div>
+</div>

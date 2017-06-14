@@ -1,8 +1,10 @@
 export class AccType {
+    Id: number;
     Name: String;
 
   constructor(
-     Name: string) {
+     Id: number, Name: string) {
+         this.Id = Id;
          this.Name = Name;
   }
 }
