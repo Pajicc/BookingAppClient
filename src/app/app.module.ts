@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { RouterModule, Routes } from '@angular/router';
-
+import { ImageUploadModule } from 'angular2-image-upload';
 import { HomeComponent } from './pages/home/home.component';
 
 import { AccomodationTypeComponent } from './accomodation-type/accomodation-type.component';
@@ -73,7 +73,8 @@ const Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(Routes)
+    RouterModule.forRoot(Routes),
+    ImageUploadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

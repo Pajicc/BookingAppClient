@@ -35,6 +35,8 @@ export class AccomodationComponent implements OnInit {
   accType: AccType;
   accTypes: Object[];
 
+  imgUrl: string;
+
   id: number;
   accName: string; 
   show: boolean;
@@ -44,7 +46,9 @@ export class AccomodationComponent implements OnInit {
     private httpPlaceService: HttpPlaceService,
     private httpAppUserService: HttpAppUserService,
     private httpAccTypeService: HttpAccTypeService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+      this.imgUrl = "";
+     }
 
   ngOnInit() {
     this.getAll();
@@ -67,6 +71,7 @@ export class AccomodationComponent implements OnInit {
   }
 
   addAccomodation(newAccom: Accomodation,  form: NgForm): void {
+    newAccom.ImageURL = this.imgUrl;
     newAccom.Approved = this.approved;
     this.httpAccomodationService.postAccomodation(newAccom).subscribe(
       (co:any) => {this.getAll()},
@@ -106,6 +111,16 @@ export class AccomodationComponent implements OnInit {
       this.approved = false
     }
   }
+  imageUploaded(e){
+    console.log(e);
+    this.imgUrl = "http://localhost:54042/Content/AccImages/"+e.file.name;
+  }
+  imageRemoved(e){
+     console.log("Image removed!");
+  }
+  ///isPending(){
+
+  //}
 
   /*showAdd(): boolean{
     if(parseInt(localStorage.getItem('appUserID'))==this.accom.AppUserId)
