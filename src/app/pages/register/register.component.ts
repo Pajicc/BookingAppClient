@@ -17,7 +17,9 @@ export class RegisterComponent implements OnInit {
   toggledManager: boolean;
   toggledUser: boolean;
 
-  constructor(private router: Router, private registerService: RegisterService) { }
+  constructor(private router: Router, private registerService: RegisterService) { 
+    this.role = "AppUser";
+  }
 
   ngOnInit() {
   }

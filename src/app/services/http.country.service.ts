@@ -39,4 +39,29 @@ export class HttpCountryService{
             Code: country.Code
         }), opts);
   }
+
+  deleteCountry(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/Countries/${id}`, opts);
+    }
+
+    updateCountry(country: Country) : Observable<any>{
+debugger;
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/Countries/${country.Id}`,  
+       JSON.stringify(country), opts);
+    }
 }

@@ -31,8 +31,38 @@ export class HttpRoomReservationService{
 
          return this.http.post(
         'http://localhost:54042/api/RoomReservations',
-        JSON.stringify({
-            StartDate: roomRes.StartDate
-        }), opts);
+        JSON.stringify(
+            {
+            StartDate: roomRes.StartDate,
+            EndDate: roomRes.EndDate,
+            AppUserId: roomRes.AppUserId,
+            RoomId: roomRes.RoomId
+            }
+        ), opts);
+    }
+
+     deleteRoomRes(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/RoomReservations/${id}`, opts);
+    }
+
+    updateRoomRes(ro: RoomReservations) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/RoomReservations/${ro.Id}`,  
+       JSON.stringify(ro), opts);
     }
 }

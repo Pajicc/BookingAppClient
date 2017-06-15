@@ -34,7 +34,36 @@ export class HttpRoomService{
          return this.http.post(
         'http://localhost:54042/api/Rooms',
         JSON.stringify({
-            RoomNumber: room.RoomNumber
+            RoomNumber: room.RoomNumber,
+            BedCount: room.BedCount,
+            Description: room.Description,
+            PricePerNight: room.PricePerNight,
+            AccomodationId: room.AccomodationId
         }), opts);
+    }
+
+     deleteRoom(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/Rooms/${id}`, opts);
+    }
+
+    updateRoom(ro: Room) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/Rooms/${ro.Id}`,  
+       JSON.stringify(ro), opts);
     }
 }

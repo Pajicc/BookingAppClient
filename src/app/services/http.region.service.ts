@@ -39,4 +39,29 @@ export class HttpRegionService{
             CountryId: region.CountryId
         }), opts);
     }
+
+     deleteRegion(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/Regions/${id}`, opts);
+    }
+
+    updateRegion(reg: Region) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/Regions/${reg.Id}`,  
+       JSON.stringify(reg), opts);
+    }
 }
