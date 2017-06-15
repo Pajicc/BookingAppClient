@@ -1,75 +1,12 @@
 <nav class="navbar navbar-default">
 
     <div class="container-fluid">
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAccTypeCollapse" aria-expanded="false" aria-controls="addAccTypeCollapse">
-           Add Accomodation type
+        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addAccModal" aria-expanded="false">
+           Add Accomodation 
         </button><br><br>
     </div>
-    <div class="collapse" id="addAccTypeCollapse">
-        <div class="card card-block">
-            <form class="container" #f="ngForm" (ngSubmit)="addAccomodation(f.value, f)">
-
-                <div class="form-group">
-                    <label for="Name">Name</label>
-                    <input type="text" class="form-control" name="Name" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="Description">Description</label>
-                    <input type="text" class="form-control" name="Description" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="Address">Address</label>
-                    <input type="text" class="form-control" name="Address" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="AverageGrade">AverageGrade</label>
-                    <input type="text" class="form-control" name="AverageGrade" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="Latitude">Latitude</label>
-                    <input type="text" class="form-control" name="Latitude" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="Longtitude">Longtitude</label>
-                    <input type="text" class="form-control" name="Longtitude" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="ImageURL">ImageURL</label>
-                    <input type="text" class="form-control" name="ImageURL" ngModel>
-                </div>
-
-                <div class="form-group">
-                    <label><input type="checkbox" (change)="chk($event)"/> Approved?</label>
-                </div>
-
-                <div class="form-group">
-                    <label for="PlaceId">PlaceId</label>
-                </div>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="PlaceId" name="PlaceId" ngModel>
-                <option *ngFor="let place of places" value="{{place.Id}}">{{place.Name}}</option>
-                </select>
-
-                <div class="form-group">
-                    <label for="AppUserId">AppUserId</label>
-                </div>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AppUserId" name="AppUserId" ngModel>
-                <option *ngFor="let appUser of appUsers" value="{{appUser.Id}}">{{appUser.Name}}</option>
-                </select>
-
-                <div class="form-group">
-                    <label for="AccomodationTypeId">AccomodationTypeId</label>
-                </div>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationTypeId" name="AccomodationTypeId" ngModel>
-                <option *ngFor="let accType of accTypes" value="{{accType.Id}}">{{accType.Name}}</option>
-                </select>
-
-                <button type="submit" class="btn btn-info">Submit</button>
-            </form>
-        </div>
-    </div> <br> <br>
-    
     <div class="container-fluid">
-        <h3>Accomodation types</h3>
+        <h3>Accomodations</h3>
             <div class="card card-block">
                 <ul class="list-inline center-block align-items-center">
             
@@ -93,7 +30,89 @@
             </div>
      </div>
 </nav>
-<!-- Delete accType modal -->
+<!-- Add acc modal -->
+
+<div class="modal fade" id="addAccModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Add new</h4>
+            </div>
+            <div class="modal-body">
+                <div class="card card-block">
+                <form class="container" #f="ngForm" (ngSubmit)="addAccomodation(f.value, f)">
+
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" name="Name" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <input type="text" class="form-control" name="Description" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address">Address</label>
+                        <input type="text" class="form-control" name="Address" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="AverageGrade">AverageGrade</label>
+                        <input type="number" class="form-control" name="AverageGrade" max="5" min="0" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="Latitude">Latitude</label>
+                        <input type="text" class="form-control" name="Latitude" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="Longtitude">Longtitude</label>
+                        <input type="text" class="form-control" name="Longtitude" ngModel>
+                    </div>
+                    <div class="form-group">
+                        <label for="ImageURL">ImageURL</label>
+                        <input type="text" class="form-control" name="ImageURL" ngModel>
+                    </div>
+
+                    <div class="form-group">
+                        <label><input type="checkbox" (change)="chk($event)"/> Approved </label>
+                    </div>
+
+                   <div class="row">
+                        <div class="col-4">
+                            <label for="PlaceId">Place</label>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="PlaceId" name="PlaceId" ngModel>
+                            <option *ngFor="let place of places" value="{{place.Id}}">{{place.Name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-4">
+                        <label for="AppUserId">AppUser</label>
+                   
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AppUserId" name="AppUserId" ngModel>
+                        <option *ngFor="let appUser of appUsers" value="{{appUser.Id}}">{{appUser.Name}}</option>
+                        </select>
+                        </div>
+                        <div class="col-4">
+                        <label for="AccomodationTypeId">AccomodationType</label>
+                   
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationTypeId" name="AccomodationTypeId" ngModel>
+                        <option *ngFor="let accType of accTypes" value="{{accType.Id}}">{{accType.Name}}</option>
+                        </select><br><br>
+                        </div>
+                   </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>             
+        </div>
+    </div>
+</div>
+
+<!-- Delete acc modal -->
 
 <div class="modal fade" id="delAccModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -113,7 +132,7 @@
     </div>
 </div>
 
-<!-- Edit accType modal -->
+<!-- Edit acc modal -->
 
 <div class="modal fade" id="editAccModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -125,7 +144,7 @@
             <h4 class="modal-title" id="modalLabel">Edit</h4>
             </div>
             <div class="modal-body">
-           <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAccType(f1.value, f1)"> -->
+           <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAcc(f1.value, f1)"> -->
                     <div *ngIf="accom != null" >
                         <label for="Name">Name: </label>
                         <input type = "text" name ="Name" id="Name" [(ngModel)]="accom.Name"/><br>

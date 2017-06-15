@@ -24,10 +24,11 @@ export class CommentComponent implements OnInit {
   comments: Object[];
   accom: Accomodation;
   accoms: Object[];
-  appUser: AppUser;
+  appUserr: AppUser;
   appUsers: Object[];
 
-  id: number;
+  userId: number;
+  accId: number;
   accName: string;
 
   constructor(private httpCommentService: HttpCommentService,
@@ -40,7 +41,7 @@ export class CommentComponent implements OnInit {
 
   getAll() {
     this.httpCommentService.getComments().subscribe(
-      (co: any) => { this.comments = co; console.log(this.comments) },//You can set the type to Product.
+      (co: any) => { this.comments = co; console.log(this.comments) },
       error => { alert("Unsuccessful fetch operation!"); console.log(error); }
     );
     this.httpAccomodationService.getAccomodation().subscribe(
@@ -52,6 +53,9 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(newComment: Comment, form: NgForm): void {
+    //newComment.AppUserId = parseInt(localStorage.getItem('appUserID'));  //setuj comment id usera koji je ulogovan
+    //newComment.AppUserId = 1;
+
     this.httpCommentService.postComment(newComment).subscribe(
       (co: any) => { this.ngOnInit() },
       error => { alert("Unsuccessful insert operation!"); console.log(error); }
@@ -60,7 +64,7 @@ export class CommentComponent implements OnInit {
   }
 
   deleteComment(): void {
-    this.httpCommentService.deleteComment(this.id).subscribe(
+    this.httpCommentService.deleteComment(this.userId, this.accId).subscribe(
       (com: any) => { this.getAll() },
       error => { alert("Unsuccessful delete!"); console.log(error); }
     );
@@ -73,16 +77,13 @@ export class CommentComponent implements OnInit {
     );
   }
 
-  setId(id: number) {
-    this.id = id;
+  setId(userId: number, accId: number) {
+    this.userId = userId;
+    this.accId = accId;
   }
 
   setComment(com: Comment) {
     this.comment = com;
   }
 
-  onPost(res: any): void {
-    alert("Post!");
-    console.log(res.json());
-  }
 }

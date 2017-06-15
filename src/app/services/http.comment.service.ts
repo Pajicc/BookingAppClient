@@ -33,24 +33,19 @@ export class HttpCommentService {
 
         return this.http.post(
             'http://localhost:54042/api/Comments',
-            JSON.stringify({
-                Grade: comment.Grade,
-                Text: comment.Text,
-                AccomodationId: comment.AccomodationId,
-                AppUsersId: comment.AppUsersId
-            }), opts);
+            JSON.stringify(comment),opts).map(res => res.json());
 
     }
 
-    deleteComment(id: number): Observable<any>
+    deleteComment(accId: number, appId: number): Observable<any>
     {
         let header = new Headers();
-        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        //header.append('Authorization', 'Bearer ' + this.localStorageService.get('token'));
 
         let opts = new RequestOptions();
         opts.headers = header;
 
-        return this.http.delete(`http://localhost:54042/api/Comments/${id}`, opts);
+        return this.http.delete(`http://localhost:54042/api/Comments/${accId}/${appId}`, opts);
     }
 
     updateComment(com: Comment) : Observable<any>{

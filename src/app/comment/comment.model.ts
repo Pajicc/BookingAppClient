@@ -1,21 +1,23 @@
+import{Accomodation} from '../accomodation/accomodation.model';
+
 export class Comment {
 
     public Id: number;
     public Grade: number;
     public Text: string;
     public AccomodationId: number;
-    public AppUsersId: number;
+    public AppUserId: number;
 
     constructor(
         Id: number,
          Grade: number,
          Text: string,
          AccomodationId: number,
-         AppUsersId: number){
+         AppUserId: number){
              this.Id=Id;
              this.Grade = Grade;
              this.Text = Text;
              this.AccomodationId = AccomodationId;
-             this.AppUsersId = AppUsersId;
+             this.AppUserId = AppUserId;
          }
 }

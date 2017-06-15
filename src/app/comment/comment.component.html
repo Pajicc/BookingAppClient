@@ -1,43 +1,18 @@
 <nav class="navbar navbar-default">
 
     <div class="container-fluid">
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addCommentCollapse" aria-expanded="false" aria-controls="addCommentCollapse">
+        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addCommentModal" aria-expanded="false" >
            Add comment
         </button><br><br>
     </div>
-    <div class="collapse" id="addCommentCollapse">
-        <div class="card card-block">
-            <form class="container" #f="ngForm" (ngSubmit)="addComment(f.value, f)">
 
-                <div class="form-group">
-                    <label for="Grade">grade:</label>
-                    <input type="text" class="form-control" placeholder="Grade" name="Grade" ngModel>
-                </div>
-                <div class="form-group">
-                    <label for="Text">text:</label>
-                    <input type="text" class="form-control" placeholder="Text" name="Text" ngModel>
-                </div>
-                <div class="form-group">
-                <label for="AccomodationId">accommodation:</label>  
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationId" name="AccomodationId" ngModel>
-       <option *ngFor="let accom of accoms" value="{{accom.Id}}">{{accom.Name}}</option>
-    </select>
-               <span ><label  for="AppUserId">user:</label></span>
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AppUserId" name="AppUserId" ngModel>
-       <option *ngFor="let appUser of appUsers" value="{{appUser.Id}}">{{appUser.Name}}</option>
-    </select>
-            </div>
-                <button type="submit" class="btn btn-info">Submit</button>
-            </form>
-        </div>
-    </div>
 
-    <h3>Comments</h3>
     <div class="container-fluid">
+        <h3>Comments</h3>
         <ul class="list-inline center-block align-items-center">
             <li class="text-left " *ngFor="let comment of comments">
                 <p> Grade: {{comment.Grade}}, <br> Comment: {{comment.Text}}</p>
-                <a role="button" (click)="setId(comment.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delCommentModal" aria-expanded="false"
+                <a role="button" (click)="setId(comment.AppUserId, comment.AccomodationId)" aria-haspopup="true" data-toggle="modal" data-target="#delCommentModal" aria-expanded="false"
                     class="pull-right">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
@@ -51,8 +26,46 @@
     </div>
 </nav>
 
-<!-- Delete comment modal -->
+<!-- Add comment modal -->
 
+<div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Add new</h4>
+            </div>
+            <div class="modal-body">
+                <div class="card card-block">
+                    <form class="container" #f="ngForm" (ngSubmit)="addComment(f.value, f)">
+
+                        <div class="form-group">
+                            <label for="Grade">Grade:</label>
+                            <input type="number" class="form-control" placeholder="Grade" name="Grade" max="5" min="1" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Text">Text:</label>
+                            <input type="text" class="form-control" placeholder="Text" name="Text" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="AccomodationId">Accommodation: </label>  
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationId" name="AccomodationId" ngModel>
+                                    <option *ngFor="let accom of accoms" value="{{accom.Id}}">{{accom.Name}}</option>
+                            </select>
+                        </div> 
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </form>
+                </div>
+            </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>              
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete comment modal -->
 <div class="modal fade" id="delCommentModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
