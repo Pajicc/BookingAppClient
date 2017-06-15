@@ -39,4 +39,29 @@ export class HttpPlaceService {
             RegionId: place.RegionId
         }), opts);
     }
+
+     deletePlace(id: number): Observable<any>
+    {
+        let header = new Headers();
+        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        let opts = new RequestOptions();
+        opts.headers = header;
+
+        return this.http.delete(`http://localhost:54042/api/Places/${id}`, opts);
+    }
+
+    updatePlace(pl: Place) : Observable<any>{
+
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+       return this.http.put(`http://localhost:54042/api/Places/${pl.Id}`,  
+       JSON.stringify(pl), opts);
+    }
 }

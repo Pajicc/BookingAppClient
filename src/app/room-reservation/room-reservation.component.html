@@ -1,28 +1,69 @@
-<div>
-    <ul>
-        <li *ngFor="let roomRes of roomResss">{{roomRes.StartDate}}</li>
-    </ul>
+<nav class="navbar navbar-default">
+
+    <div class="container-fluid">
+        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addRoomResModal" aria-expanded="false">
+           Add room reservation 
+        </button><br><br>
+    </div>
+    <div class="container-fluid">
+        <h3>Room reservations</h3>
+        <div class="card card-block">
+            <ul class="list-inline center-block align-items-center">
+
+                <li *ngFor="let roomRes of roomResss">
+                    <p>Start date: {{roomRes.StartDate}}</p>
+                    <p>End date: {{roomRes.EndDate</p>
+                    <p>Room: {{roomRes.RoomId}}</p>
+                    <a role="button" (click)="setId(roomRes.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delRoomRessModal" aria-expanded="false"
+                        class="pull-right">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    <a role="button" (click)="setRoomRess(accom)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editRoomResModal"
+                        class="pull-right">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a><br>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Add acc modal -->
+
+<div class="modal fade" id="addRoomResModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLabel">Add new</h4>
+            </div>
+            <div class="modal-body">
+                <div class="card card-block">
+                    <form class="container" #f="ngForm" (ngSubmit)="addRoomReservations(f.value, f)">
+                        <div class="form-group">
+                            <label for="StartDate">StartDate</label>
+                            <input type="date" class="form-control" name="StartDate" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="EndDate">EndDate</label>
+                            <input type="date" class="form-control" name="EndDate" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="RoomId">RoomId</label>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="RoomId" name="RoomId" ngModel>
+                            <option *ngFor="let room of rooms" value="{{room.Id}}">{{room.RoomNumber}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
 </div>
-<form class="container" #f="ngForm" (ngSubmit)="addRoomReservation(f.value, f)">
-    <div class="form-group">
-        <label for="StartDate">StartDate</label>
-        <input type="text" class="form-control" name="StartDate" ngModel>
-    </div>
-    <div class="form-group">
-        <label for="EndDate">EndDate</label>
-        <input type="text" class="form-control" name="EndDate" ngModel>
-    </div>
-    <div class="form-group">
-        <label for="Timestamp">Timestamp</label>
-        <input type="text" class="form-control" name="Timestamp" ngModel>
-    </div>
-    <div class="form-group">
-        <label for="AppUserId">AppUserId</label>
-        <input type="text" class="form-control" name="AppUserId" ngModel>
-    </div>
-    <div class="form-group">
-        <label for="RoomId">RoomId</label>
-        <input type="text" class="form-control" name="RoomId" ngModel>
-    </div>
-    <input type="submit" />
-</form>
