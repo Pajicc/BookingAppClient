@@ -1,99 +1,102 @@
 import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import {SearchModel} from '../search-acc-odata/search.model';
 
 @Injectable()
 export class SearchService{
 
+searchPattern: string;
+
     constructor (private http: Http){
-        
+        this.searchPattern= "";
     }
 
-    generateQuery(searchParams): Observable<any> 
+    generateQuery(searchParams: SearchModel): Observable<any> 
     {
-        let searchPattern= "";
+        this.searchPattern= "";
 
-        if (searchParams.Name != "")
+        if (searchParams.Name != "" && searchParams.Name != null)
         {                 
-            searchPattern += `filter=Name eq '${searchParams.Name}'`;
+             this.searchPattern += `filter=Name eq '${searchParams.Name}'`;
         }
 
-        if (searchParams.Country != "")
+        if (searchParams.Country != ""  && searchParams.Country != null)
         {
-          if (searchPattern !="")
+          if ( this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `Place/Region/Country/Name eq '${searchParams.Country}'`;
+           this.searchPattern += `Place/Region/Country/Name eq '${searchParams.Country}'`;
         }
 
-        if (searchParams.Region != "")
+        if (searchParams.Region != ""  && searchParams.Region != null)
         {
-          if (searchPattern !="")
+          if ( this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `Place/Region/Name eq '${searchParams.Region}'`;
+           this.searchPattern += `Place/Region/Name eq '${searchParams.Region}'`;
         }
     
-        if (searchParams.Place != "")
+        if (searchParams.Place != ""  && searchParams.Place != null)
         {
-          if (searchPattern !="")
+          if ( this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `Place/Name eq '${searchParams.Place}'`;
+           this.searchPattern += `Place/Name eq '${searchParams.Place}'`;
         }
 
-        if (searchParams.AccommodationType != "")
+        if (searchParams.AccomodationType != ""  && searchParams.AccomodationType != null)
         {
-          if (searchPattern !="")
+          if ( this.searchPattern !="" )
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `AccommodationType/Name eq '${searchParams.AccommodationType}'`;
+           this.searchPattern += `AccomodationType/Name eq '${searchParams.AccomodationType}'`;
         }
 
         if (searchParams.BedCount)
         {
-          if (searchPattern !="")
+          if (this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `Rooms/any(r: r/BedCount ge ${searchParams.BedCount})`;
+           this.searchPattern += `Rooms/any(r: r/BedCount ge ${searchParams.BedCount})`;
         }
 
         if (searchParams.Grade)
         {
-          if (searchPattern !="")
+          if ( this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `AverageGrade ge ${searchParams.Grade}`;
+           this.searchPattern += `AverageGrade ge ${searchParams.Grade}`;
         }
 
         if (searchParams.PriceMin || searchParams.PriceMax)
@@ -110,30 +113,33 @@ export class SearchService{
             max = searchParams.PriceMax;
           }
 
-          if (searchPattern !="")
+          if ( this.searchPattern !="")
           {
-            searchPattern += " and ";
+             this.searchPattern += " and ";
           }
           else
           {
-            searchPattern += `filter=`;
+             this.searchPattern += `filter=`;
           }
-          searchPattern += `Rooms/any(r: r/PricePerNight ge ${min} and r/PricePerNight le ${max})`;
+           this.searchPattern += `Rooms/any(r: r/PricePerNight ge ${min} and r/PricePerNight le ${max})`;
         }
 
-        if(searchPattern != "")
+        /*if(searchPattern != "")
         {
           searchPattern = '?$inlinecount=allpages' + searchPattern; 
         }
         else
         {
            searchPattern = '?$inlinecount=allpages';
-        }
+        }*/
 
-        searchPattern += `&$top=${searchParams.pageSize}`;
-        searchPattern += `&$skip=${searchParams.skip}`;
+        //searchPattern += `&$top=${searchParams.pageSize}`;
+        //searchPattern += `&$skip=${searchParams.skip}`;
               
-        return this.http.get(`http://localhost:54042/api/Accommodations?$filter=${searchParams} &$expand=Place, Owner, AccommodationType`);
+        //return this.http.get(this.urlProviderService.getURL() + "odata/AccommodationOData" + searchPattern).map(res => res.json());   
+    
+
+        return this.http.get(`http://localhost:54042/api/Accomodations?$${this.searchPattern}`).map(res => res.json());//&$expand=Place, Owner, AccomodationType
   }
   
 }

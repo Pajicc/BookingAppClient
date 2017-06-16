@@ -24,7 +24,6 @@ import { Comment } from './comment/comment.model';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccomodationListComponent } from './accomodation-list/accomodation-list.component';
-import { SearchAccOdataComponent } from './search-acc-odata/search-acc-odata.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -68,8 +67,7 @@ const Routes = [
     RegisterComponent,
     AdminComponent,
     LogoutComponent,
-    AccomodationListComponent,
-    SearchAccOdataComponent
+    AccomodationListComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,9 @@ import { AccType } from "../accomodation-type/accomodation-type.model";
 import { HttpPlaceService } from "../services/http.place.servise";
 import { HttpAppUserService } from "../services/http.app-user.service";
 import { HttpAccTypeService } from "../services/http.accType.service";
+import {
+  Input
+} from '@angular/core';
 
 @Component({
   selector: 'app-accomodation-list',
@@ -16,6 +19,8 @@ import { HttpAccTypeService } from "../services/http.accType.service";
   styleUrls: ['./accomodation-list.component.css']
 })
 export class AccomodationListComponent implements OnInit {
+
+  @Input() accList: Accomodation[];
 
   constructor() { }
 

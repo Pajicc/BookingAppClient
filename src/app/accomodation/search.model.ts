@@ -4,7 +4,7 @@ export class SearchModel {
     public Country: string;
     public Region: string;
     public Place: string;
-    public AccommodationType: string;
+    public AccomodationType: string;
     public BedCount: number;
     public Grade: number;
     public PriceMin: number;
@@ -15,7 +15,7 @@ export class SearchModel {
         Country: string,
         Region: string,
         Place: string,
-        AccommodationType: string,
+        AccomodationType: string,
         BedCount: number,
         Grade: number,
         PriceMin: number,
@@ -26,7 +26,7 @@ export class SearchModel {
         this.BedCount = BedCount;
         this.Region = Region;
         this.Place = Place;
-        this.AccommodationType = AccommodationType;
+        this.AccomodationType = AccomodationType;
         this.Grade = Grade;
         this.PriceMin = PriceMin;
         this.PriceMax = PriceMax;
