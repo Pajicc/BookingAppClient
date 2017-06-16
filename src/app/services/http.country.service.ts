@@ -52,7 +52,6 @@ export class HttpCountryService{
     }
 
     updateCountry(country: Country) : Observable<any>{
-debugger;
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');

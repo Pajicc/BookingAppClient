@@ -16,13 +16,12 @@ export class AuthService{
 
         //localStorage.setItem("token","myToken");
 
-        const headers: Headers = new Headers();
-        //headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/x-www-form-urlencoded');
+       let header = new Headers();
+        header.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
+        let opts = new RequestOptions();
+        opts.headers = header;
+             
         return this.http.post(
         'http://localhost:54042/oauth/token',
         `username=${userLogin.Username}&password=${userLogin.Password}&grant_type=password`,opts);

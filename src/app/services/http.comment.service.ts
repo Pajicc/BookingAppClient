@@ -48,17 +48,17 @@ export class HttpCommentService {
         return this.http.delete(`http://localhost:54042/api/Comments/${accId}/${appId}`, opts);
     }
 
-    updateComment(com: Comment) : Observable<any>{
+    updateComment(accId: number, appId:number, comm : Comment) : Observable<any>{
 
         const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
+       // headers.append('Accept', 'application/json');
+        //headers.append('Content-type', 'application/json');
         //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
 
-       return this.http.put(`http://localhost:54042/api/Comments/${com.Id}`,  
-       JSON.stringify(com), opts);
+       return this.http.put(`http://localhost:54042/api/Comments/${accId}/${appId}`,
+            JSON.stringify(comm),opts).map(res => res.json()); 
     }
 }

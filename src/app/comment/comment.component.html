@@ -98,9 +98,9 @@
             <div class="modal-body">
          
                     <div *ngIf="comment != null">
-                        <label for="Grade">grade: </label>
-                        <input type = "text" name ="Grade" id="Grade" [(ngModel)]="comment.Grade"/>
-                         <label for="Text">text: </label>
+                        <label for="Grade"> Grade: </label>
+                        <input type="number" max="5" min="1" name ="Grade" id="Grade" [(ngModel)]="comment.Grade"/>
+                         <label for="Text"> Text: </label>
                         <input type = "text" name ="Text" id="Text" [(ngModel)]="comment.Text"/>
                     </div><br>
 

@@ -53,7 +53,9 @@ export class CommentComponent implements OnInit {
   }
 
   addComment(newComment: Comment, form: NgForm): void {
-    //newComment.AppUserId = parseInt(localStorage.getItem('appUserID'));  //setuj comment id usera koji je ulogovan
+    newComment.AppUserId = parseInt(localStorage.getItem('userID'));  //setuj comment id usera koji je ulogovan
+    
+    console.log(localStorage.getItem('userID'));
     //newComment.AppUserId = 1;
 
     this.httpCommentService.postComment(newComment).subscribe(
@@ -71,7 +73,7 @@ export class CommentComponent implements OnInit {
   }
 
   editComment(): void {
-    this.httpCommentService.updateComment(this.comment).subscribe(
+    this.httpCommentService.updateComment(this.accId,this.userId,this.comment).subscribe(
       (com: any) => { this.getAll() },
       error => { alert("Unsuccessful edit!"); console.log(error); }
     );

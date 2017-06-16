@@ -118,6 +118,10 @@ export class AccomodationComponent implements OnInit {
   imageRemoved(e){
      console.log("Image removed!");
   }
+
+  isAdmin(): boolean{
+    return this.authService.isUserAdmin();
+  }
   ///isPending(){
 
   //}

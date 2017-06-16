@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
         console.log(access_token);      
         let role = response.headers.get('Role');
         console.log(role);
-        let appUserID = response.headers.get('appUserID');
-        console.log(appUserID);
+        let userID = response.headers.get('userID');
+        console.log(userID);
         localStorage.setItem('token',access_token);
         localStorage.setItem('role',role);      
-        localStorage.setItem('appUserID',appUserID);     
+        localStorage.setItem('userID',userID);     
     }
 
   logOut() {
