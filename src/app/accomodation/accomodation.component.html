@@ -1,108 +1,116 @@
 <nav class="navbar navbar-default">
-      
-        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
              <i class="fa fa-search" aria-hidden="true"></i>    Search accomodations  
         </button>
 
-            <div class="collapse" id="collapseExample">
-               <form class="container" #f2="ngForm" (ngSubmit)="searchAccomodations(f2.value, f2)">
-                <div class="card card-block">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <label for="Name">Name:</label>
-                            <input type="text" class="form-control" name="Name" ngModel>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="Country">Country</label>    <br>
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Country" name="Country" ngModel>
+    <div class="collapse" id="collapseExample">
+        <form class="container" #f2="ngForm" (ngSubmit)="searchAccomodations(f2.value, f2)">
+            <div class="card card-block">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="Name">Name:</label>
+                        <input type="text" class="form-control" name="Name" ngModel>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Country">Country</label> <br>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Country" name="Country" ngModel>
                             <option *ngFor="let country of countries" value="{{country.Name}}">{{country.Name}}</option>
                             </select>
-                        </div>
+                    </div>
                     <div class="col-sm-3">
-                            <label for="Place">Place</label>       <br>
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Place" name="Place" ngModel>
+                        <label for="Place">Place</label> <br>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Place" name="Place" ngModel>
                             <option *ngFor="let place of places" value="{{place.Name}}">{{place.Name}}</option>
                             </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="Region">Region</label>       <br>
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Region" name="Region" ngModel>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Region">Region</label> <br>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="Region" name="Region" ngModel>
                             <option *ngFor="let region of regions" value="{{region.Name}}">{{region.Name}}</option>
                             </select>
-                        </div>               
-                    </div>  <br> <br> 
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label for="AccomodationType">AccomodationType</label>     <br>
-                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationType" name="AccomodationType" ngModel>
+                    </div>
+                </div> <br> <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="AccomodationType">AccomodationType</label> <br>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationType" name="AccomodationType" ngModel>
                                 <option *ngFor="let accType of accTypes" value="{{accType.Name}}">{{accType.Name}}</option>
                                 </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="BedCount">Bed count:</label>
-                                <input type="number" class="form-control" name="BedCount" max="10" min="0" ngModel>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="Grade">Grade:</label>
-                                <input type="number" class="form-control" name="Grade" max="5" min="0" ngModel>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="PriceMin">PriceMin:</label>
-                                <input type="number" class="form-control" name="PriceMin" max="5" min="0" ngModel>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="PriceMax">PriceMax:</label>
-                                <input type="number" class="form-control" name="PriceMax" max="5" min="0" ngModel>
-                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="BedCount">Bed count:</label>
+                        <input type="number" class="form-control" name="BedCount" max="10" min="0" ngModel>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Grade">Grade:</label>
+                        <input type="number" class="form-control" name="Grade" max="5" min="0" ngModel>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="PriceMin">PriceMin:</label>
+                        <input type="number" class="form-control" name="PriceMin" max="5" min="0" ngModel>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="PriceMax">PriceMax:</label>
+                        <input type="number" class="form-control" name="PriceMax" max="5" min="0" ngModel>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info">Search</button>
-            </form>
+            </div>
+            <button type="submit" class="btn btn-info">Search</button>
+        </form>
 
-            </div><br><br><br><br>
+    </div><br><br><br><br>
 
     <div class="container-fluid" *ngIf="isAdmin() || isManager()">
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addAccModal" aria-expanded="false">
            Add Accomodation 
         </button><br><br>
     </div>
-   <div class="container-fluid">
+    <div class="container-fluid">
         <h3>Accomodations</h3>
-                <ul class="list-inline center-block align-items-center">
-            
-                    <li class="text-left" *ngFor="let accom of accoms">
-                        <div class="row">
-                            <hr>
-                             <div class="col-sm-6">
-                                <p>Name: {{accom.Name}}</p>
-                                <p>Description: {{accom.Description}}</p>
-                                <p>Address: {{accom.Address}}</p>
-                                <p>AvrgeGrade: {{accom.AverageGrade}}</p>
-                                <p>Latitude: {{accom.Latitude}}</p>
-                                <p>Longitude: {{accom.Longtitude}}</p>
-                                <!--<p>AccommodationTypeId: {{accom.AccomodationTypeId}}</p>-->
-                             </div>
-                             <div class="col-sm-6">
-                                <p ><img src={{accom.ImageURL}} alt="Image" style="width:304px;height:228px;"></p>
-                            </div>                
+        <ul class="list-inline center-block align-items-center">
+
+            <li class="text-left" *ngFor="let accom of accoms">
+                <div class="row">
+                    <hr>
+                    <div class="col-sm-6">
+                        <p>Name: {{accom.Name}}</p>
+                        <p>Description: {{accom.Description}}</p>
+                        <p>Address: {{accom.Address}}</p>
+                        <p>AvrgeGrade: {{accom.AverageGrade}}</p>
+                        <p>Latitude: {{accom.Latitude}}</p>
+                        <p>Longitude: {{accom.Longtitude}}</p>
+                        <!--<p>AccommodationTypeId: {{accom.AccomodationTypeId}}</p>-->
+                    </div>
+                    <div class="col-sm-6">
+                        <p><img src={{accom.ImageURL}} alt="Image" style="width:304px;height:228px;"></p>
+                    </div>
+                    <div class="col-sm-8">
+                        <div style="width:304px;height:228px;">
+                            <map [mapInfo]="mapInfo"></map>
+                            
                         </div>
-                        <div class="row">
-                            <div class="col-sm-4"></div>
-                            <div class="col-sm-4">
-                                <a role="button" (click)="setId(accom.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delAccModal" aria-expanded="false" class="pull-right">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <a role="button" (click)="setId(accom.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delAccModal" aria-expanded="false"
+                            class="pull-right">
                                     <i class="fa fa-2x fa-times" aria-hidden="true"></i>
                                 </a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a role="button" (click)="setAcc(accom)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editAccModal" class="pull-right">
+                    </div>
+                    <div class="col-sm-4">
+                        <a role="button" (click)="setAcc(accom)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editAccModal"
+                            class="pull-right">
                                     <i class="fa fa-2x fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
-                            </div><br><br><br><br>
-                        </div>
-                    </li>
-                    
-                </ul>
-     </div>
+                    </div><br><br><br><br>
+                </div>
+            </li>
+
+        </ul>
+    </div>
 </nav>
 <!-- Add acc modal -->
 
@@ -113,87 +121,80 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            <h4 class="modal-title" id="modalLabel">Add new</h4>
+                <h4 class="modal-title" id="modalLabel">Add new</h4>
             </div>
             <div class="modal-body">
                 <div class="card card-block">
-                <form class="container" #f="ngForm" (ngSubmit)="addAccomodation(f.value, f)">
+                    <form class="container" #f="ngForm" (ngSubmit)="addAccomodation(f.value, f)">
 
-                    <div class="form-group">
-                        <label for="Name">Name</label>
-                        <input type="text" class="form-control" name="Name" ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="Description">Description</label>
-                        <input type="text" class="form-control" name="Description" ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="Address">Address</label>
-                        <input type="text" class="form-control" name="Address" ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="AverageGrade">AverageGrade</label>
-                        <input type="number" class="form-control" name="AverageGrade" max="5" min="0" ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="Latitude">Latitude</label>
-                        <input type="text" class="form-control" name="Latitude" ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="Longtitude">Longtitude</label>
-                        <input type="text" class="form-control" name="Longtitude" ngModel>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="ImageUrl" [(ngModel)]="imgUrl">
-                        <image-upload
-                            [max]="100"
-                            [url]="'http://localhost:54042/api/UploadIMG'"
-                            [headers]="[
-                                {header: 'Authorization', value: 'MyToken'}
-                            ]"
-                            [buttonCaption]="'Select Images!'"
-                            [dropBoxMessage]="'Drop your images here!'"
-                            (onFileUploadFinish)="imageUploaded($event)"
-                            (onRemove)="imageRemoved($event)" 
-                            [fileTooLargeMessage]="'Image too large!'">
-                         </image-upload>
-                    </div>
-
-                    <div class="form-group">
-                        <label><input type="checkbox" (change)="chk($event)"/> Approved </label>
-                    </div>
-
-                   <div class="row">
-                        <div class="col-4">
-                            <label for="PlaceId">Place</label>
-                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="PlaceId" name="PlaceId" ngModel>
-                            <option *ngFor="let place of places" value="{{place.Id}}">{{place.Name}}</option>
-                            </select>
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input type="text" class="form-control" name="Name" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <input type="text" class="form-control" name="Description" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Address">Address</label>
+                            <input type="text" class="form-control" name="Address" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="AverageGrade">AverageGrade</label>
+                            <input type="number" class="form-control" name="AverageGrade" max="5" min="0" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Latitude">Latitude</label>
+                            <input type="text" class="form-control" name="Latitude" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label for="Longtitude">Longtitude</label>
+                            <input type="text" class="form-control" name="Longtitude" ngModel>
                         </div>
 
-                        <!--<div class="col-4">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="ImageUrl" [(ngModel)]="imgUrl">
+                            <image-upload [max]="100" [url]="'http://localhost:54042/api/UploadIMG'" [headers]="[
+                                {header: 'Authorization', value: 'MyToken'}
+                            ]" [buttonCaption]="'Select Images!'" [dropBoxMessage]="'Drop your images here!'" (onFileUploadFinish)="imageUploaded($event)"
+                                (onRemove)="imageRemoved($event)" [fileTooLargeMessage]="'Image too large!'">
+                            </image-upload>
+                        </div>
+
+                        <div class="form-group">
+                            <label><input type="checkbox" (change)="chk($event)"/> Approved </label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="PlaceId">Place</label>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="PlaceId" name="PlaceId" ngModel>
+                            <option *ngFor="let place of places" value="{{place.Id}}">{{place.Name}}</option>
+                            </select>
+                            </div>
+
+                            <!--<div class="col-4">
                         <label for="AppUserId">AppUser</label>
                    
                         <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AppUserId" name="AppUserId" ngModel>
                         <option *ngFor="let appUser of appUsers" value="{{appUser.Id}}">{{appUser.Name}}</option>
                         </select>
                         </div>-->
-                        <div class="col-4">
-                        <label for="AccomodationTypeId">AccomodationType</label>
-                   
-                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationTypeId" name="AccomodationTypeId" ngModel>
+                            <div class="col-4">
+                                <label for="AccomodationTypeId">AccomodationType</label>
+
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="AccomodationTypeId" name="AccomodationTypeId" ngModel>
                         <option *ngFor="let accType of accTypes" value="{{accType.Id}}">{{accType.Name}}</option>
                         </select><br><br>
+                            </div>
                         </div>
-                   </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#uploadImageModal" >Submit</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#uploadImageModal">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>             
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
@@ -207,13 +208,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            <h4 class="modal-title" id="modalLabel">Delete</h4>
+                <h4 class="modal-title" id="modalLabel">Delete</h4>
             </div>
             <div class="modal-body">
                 Are you sure you want to delete this Accomodation?
             </div>
-                <button type="button" class="btn btn-primary" (click)="deleteAcc()" data-dismiss="modal">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>              
+            <button type="button" class="btn btn-primary" (click)="deleteAcc()" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         </div>
     </div>
 </div>
@@ -227,29 +228,29 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            <h4 class="modal-title" id="modalLabel">Edit</h4>
+                <h4 class="modal-title" id="modalLabel">Edit</h4>
             </div>
             <div class="modal-body">
-           <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAcc(f1.value, f1)"> -->
-                    <div *ngIf="accom != null" >
-                        <label for="Name">Name: </label>
-                        <input type = "text" name ="Name" id="Name" [(ngModel)]="accom.Name"/><br>
-                        <label for="Description">Description: </label>
-                        <input type = "text" name ="Description" id="Description" [(ngModel)]="accom.Description"/><br>
-                        <label for="Address">Address: </label>
-                        <input type = "text" name ="Address" id="Address" [(ngModel)]="accom.Address"/><br>
-                        <label for="AverageGrade">Average grade: </label>
-                        <input type = "text" name ="AverageGrade" id="AverageGrade" [(ngModel)]="accom.AverageGrade"/><br>
-                        <label for="Latitude">Latitude: </label>
-                        <input type = "text" name ="Latitude" id="Latitude" [(ngModel)]="accom.Latitude"/><br>
-                        <label for="Longtitude">Longtitude: </label>
-                        <input type = "text" name ="Longtitude" id="Longtitude" [(ngModel)]="accom.Longtitude"/><br>
-                    </div><br>
+                <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAcc(f1.value, f1)"> -->
+                <div *ngIf="accom != null">
+                    <label for="Name">Name: </label>
+                    <input type="text" name="Name" id="Name" [(ngModel)]="accom.Name" /><br>
+                    <label for="Description">Description: </label>
+                    <input type="text" name="Description" id="Description" [(ngModel)]="accom.Description" /><br>
+                    <label for="Address">Address: </label>
+                    <input type="text" name="Address" id="Address" [(ngModel)]="accom.Address" /><br>
+                    <label for="AverageGrade">Average grade: </label>
+                    <input type="text" name="AverageGrade" id="AverageGrade" [(ngModel)]="accom.AverageGrade" /><br>
+                    <label for="Latitude">Latitude: </label>
+                    <input type="text" name="Latitude" id="Latitude" [(ngModel)]="accom.Latitude" /><br>
+                    <label for="Longtitude">Longtitude: </label>
+                    <input type="text" name="Longtitude" id="Longtitude" [(ngModel)]="accom.Longtitude" /><br>
+                </div><br>
 
-                    <button type="submit" (click)="editAcc()" class="btn btn-primary" data-dismiss="modal">Edit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
-             <!--    </form> -->
-            </div>          
+                <button type="submit" (click)="editAcc()" class="btn btn-primary" data-dismiss="modal">Edit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!--    </form> -->
+            </div>
         </div>
     </div>
 </div>

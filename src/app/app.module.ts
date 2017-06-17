@@ -24,6 +24,8 @@ import { Comment } from './comment/comment.model';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccomodationListComponent } from './accomodation-list/accomodation-list.component';
+import { AgmCoreModule } from '@agm/core';
+import { MapComponent } from './map/map.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -48,6 +50,7 @@ const Routes = [
   { path: "appUsers", component: AppUserComponent},
   { path: "rooms", component: RoomComponent},
   { path: "roomReservations", component: RoomReservationComponent},
+     { path: "map", component: MapComponent},
 ]
 
 @NgModule({
@@ -67,13 +70,17 @@ const Routes = [
     RegisterComponent,
     AdminComponent,
     LogoutComponent,
-    AccomodationListComponent
+    AccomodationListComponent,
+     MapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(Routes),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDHqiCzsljunE3BouTwangI15Z33CMNgw0'
+    }),
     ImageUploadModule.forRoot()
   ],
   providers: [],

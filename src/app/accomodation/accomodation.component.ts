@@ -10,15 +10,18 @@ import { HttpPlaceService } from "../services/http.place.servise";
 import { HttpAppUserService } from "../services/http.app-user.service";
 import { HttpAccTypeService } from "../services/http.accType.service";
 import { AuthService } from "../services/auth.service";
-import {HttpRegionService} from '../services/http.region.service';
-import {HttpCountryService} from '../services/http.country.service';
-import {SearchService} from '../services/search-odata-service';
-import {SearchModel} from 'app/accomodation/search.model';
+import { HttpRegionService } from '../services/http.region.service';
+import { HttpCountryService } from '../services/http.country.service';
+import { SearchService } from '../services/search-odata-service';
+import { SearchModel } from '../accomodation/search.model';
+import { MapInfo } from "../map/map-info.model";
+
 
 @Component({
   selector: 'app-accomodation',
   templateUrl: './accomodation.component.html',
   styleUrls: ['./accomodation.component.css'],
+  styles: ['agm-map {height: 300px; width: 500px;}'],
   providers: [
     HttpAccomodationService,
     HttpPlaceService,
@@ -26,9 +29,9 @@ import {SearchModel} from 'app/accomodation/search.model';
     HttpAccTypeService,
     HttpRegionService,
     HttpCountryService,
-    AuthService, 
+    AuthService,
     SearchService
-    ]
+  ]
 })
 export class AccomodationComponent implements OnInit {
 
@@ -45,7 +48,7 @@ export class AccomodationComponent implements OnInit {
   count: number = 0;
   skip: number = 0;
   searchParamsSave;
-  entitiesPerPage = 1; 
+  entitiesPerPage = 1;
 
   regions: AccType[];
   countries: AccType[];
@@ -54,8 +57,9 @@ export class AccomodationComponent implements OnInit {
   imgUrl: string;
 
   id: number;
-  accName: string; 
+  accName: string;
   show: boolean;
+  mapInfo: MapInfo;
 
   constructor(
     private httpAccomodationService: HttpAccomodationService,
@@ -66,66 +70,75 @@ export class AccomodationComponent implements OnInit {
     private countryService: HttpCountryService,
     private authService: AuthService,
     private searchODataService: SearchService) {
-      this.imgUrl = "";
-     }
+    this.imgUrl = "";
+    this.mapInfo = {} as MapInfo;
+  }
 
   ngOnInit() {
     this.getAll();
   }
 
-  getAll(){
+  getAll() {
     this.httpAccomodationService.getAccomodation().subscribe(
       (am: any) => { this.accoms = am; console.log(this.accoms) },
       error => { alert("Unsuccessful accomodation fetch operation!"); console.log(error); }
     );
     this.httpPlaceService.getPlaces().subscribe(
-      (pl: any) => {this.places = pl; console.log(this.places)}
+      (pl: any) => { this.places = pl; console.log(this.places) }
     );
-     this.countryService.getCountries().subscribe(
-      (c: any) => {this.countries = c; console.log(this.countries)}
+    this.countryService.getCountries().subscribe(
+      (c: any) => { this.countries = c; console.log(this.countries) }
     );
-     this.regionService.getRegions().subscribe(
-      (r: any) => {this.regions = r; console.log(this.regions)}
+    this.regionService.getRegions().subscribe(
+      (r: any) => { this.regions = r; console.log(this.regions) }
     );
-     this.httpAccTypeService.getAccTypes().subscribe(
-      (acc: any) => {this.accTypes = acc; console.log(this.accTypes)}
+    this.httpAccTypeService.getAccTypes().subscribe(
+      (acc: any) => { this.accTypes = acc; console.log(this.accTypes) }
     );
   }
 
-  addAccomodation(newAccom: Accomodation,  form: NgForm): void {
+  addAccomodation(newAccom: Accomodation, form: NgForm): void {
     newAccom.ImageURL = this.imgUrl;
     newAccom.Approved = this.approved;
 
-   newAccom.AppUserId = parseInt(localStorage.getItem('userID')); 
+    this.mapInfo = new MapInfo(newAccom.Latitude, newAccom.Longtitude,
 
+      "assets/ftn.png",
+      newAccom.Name, newAccom.Address, "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+
+    newAccom.Map = this.mapInfo;
+    newAccom.AppUserId = parseInt(localStorage.getItem('userID'));
+    
     this.httpAccomodationService.postAccomodation(newAccom).subscribe(
-      (co:any) => {this.getAll()},
-      error => { alert("Unsuccessful insert operation!"); console.log(error);}
+      (co: any) => { this.getAll() },
+      error => { alert("Unsuccessful insert operation!"); console.log(error); }
     );
     form.reset();
+
+
   }
 
-   deleteAcc() : void{
-       this.httpAccomodationService.deleteAccomodation(this.id).subscribe(
-        (at: any) => {this.getAll() },
-         error => {alert("Unsuccessful delete!"); console.log(error);}
-      );
-    }
+  deleteAcc(): void {
+    this.httpAccomodationService.deleteAccomodation(this.id).subscribe(
+      (at: any) => { this.getAll() },
+      error => { alert("Unsuccessful delete!"); console.log(error); }
+    );
+  }
 
-    editAcc() : void{
-      this.httpAccomodationService.updateAccomodation(this.accom).subscribe(
-        (at: any) => {this.getAll() },
-         error => {alert("Unsuccessful edit!"); console.log(error);}
-      );
-    }
+  editAcc(): void {
+    this.httpAccomodationService.updateAccomodation(this.accom).subscribe(
+      (at: any) => { this.getAll() },
+      error => { alert("Unsuccessful edit!"); console.log(error); }
+    );
+  }
 
-    setId(id: number){
-      this.id = id;
-    }
+  setId(id: number) {
+    this.id = id;
+  }
 
-    setAcc(acc: Accomodation){
-      this.accom = acc;
-    }
+  setAcc(acc: Accomodation) {
+    this.accom = acc;
+  }
 
 
   chk(e) {
@@ -136,23 +149,23 @@ export class AccomodationComponent implements OnInit {
       this.approved = false
     }
   }
-  imageUploaded(e){
+  imageUploaded(e) {
     console.log(e);
-    this.imgUrl = "http://localhost:54042/Content/AccImages/"+e.file.name;
+    this.imgUrl = "http://localhost:54042/Content/AccImages/" + e.file.name;
   }
-  imageRemoved(e){
-     console.log("Image removed!");
+  imageRemoved(e) {
+    console.log("Image removed!");
   }
 
-  isAdmin(): boolean{
+  isAdmin(): boolean {
     return this.authService.isUserAdmin();
   }
-  
-  isManager(): boolean{
+
+  isManager(): boolean {
     return this.authService.isUserManager();
   }
 
-  searchAccomodations(searchParams: SearchModel,  form: NgForm) {
+  searchAccomodations(searchParams: SearchModel, form: NgForm) {
     //this.searchParamsSave = new SearchModel(searchParams.Name,searchParams.Country,searchParams.Region,searchParams.Place,searchParams.AccomodationType,searchParams.BedCount,searchParams.Grade,searchParams.PriceMin,searchParams.PriceMax);
     this.searchODataService.generateQuery(searchParams).subscribe(x => this.oDataResponseParser(x));
     form.reset();
@@ -170,8 +183,7 @@ export class AccomodationComponent implements OnInit {
     return (this.authService.isUserManager && (this.show));
   }*/
 
-    oDataResponseParser(x: any)
-  {
+  oDataResponseParser(x: any) {
     //this.count = x["odata.count"];
     this.accoms = x as Accomodation[]
   }
