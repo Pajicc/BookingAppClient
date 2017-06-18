@@ -195,8 +195,8 @@ export class AccomodationComponent implements OnInit {
     this.accoms = x as Accomodation[]
   }
 
-  onclick(result: any) {
-    this.latClick = result.lat;
-    this.lngClick = result.lng;
+  onClick(result: any) {
+    this.latClick = result.coords.lat;
+    this.lngClick = result.coords.lng;
   }
 }

@@ -21,3 +21,6 @@ body {
 .no-margin {
     margin: 0;
 }
+.errorMsg{
+    color:red;
+}

@@ -13,7 +13,7 @@ import { HttpRegionService } from "../services/http.region.service";
   providers: [HttpPlaceService, HttpRegionService]
 })
 export class PlaceComponent implements OnInit {
-
+errorMsg:string;
   place: Place;
   places: Object[];
   region: Region;
@@ -39,9 +39,14 @@ export class PlaceComponent implements OnInit {
   }
 
   addPlace(newPlace: Place, form: NgForm): void {
+    
+    if(!form.valid){
+      return;
+    }
     this.httpPlaceService.postPlace(newPlace).subscribe(
       (co: any) => { this.ngOnInit() },
-      error => { alert("Unsuccessful insert operation!"); console.log(error); }
+      (error:any) =>{ this.errorMsg = error.json().Message;
+        console.log(error); }
     );
     form.reset();
   }
