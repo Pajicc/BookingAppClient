@@ -15,7 +15,7 @@ import { HttpCountryService } from '../services/http.country.service';
 import { SearchService } from '../services/search-odata-service';
 import { SearchModel } from '../accomodation/search.model';
 import { MapInfo } from "../map/map-info.model";
-
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'app-accomodation',
@@ -34,7 +34,7 @@ import { MapInfo } from "../map/map-info.model";
   ]
 })
 export class AccomodationComponent implements OnInit {
-
+  mapInfo: MapInfo;
   approved: boolean;
   accom: Accomodation;
   accoms: Accomodation[];
@@ -59,7 +59,12 @@ export class AccomodationComponent implements OnInit {
   id: number;
   accName: string;
   show: boolean;
-  mapInfo: MapInfo;
+
+  lat: number = 45.267136;
+  lng: number = 19.833549;
+  latClick: number;
+  lngClick: number;
+
 
   constructor(
     private httpAccomodationService: HttpAccomodationService,
@@ -101,14 +106,16 @@ export class AccomodationComponent implements OnInit {
     newAccom.ImageURL = this.imgUrl;
     newAccom.Approved = this.approved;
 
-    this.mapInfo = new MapInfo(newAccom.Latitude, newAccom.Longtitude,
 
+    this.mapInfo = new MapInfo(this.latClick, this.lngClick,
       "assets/ftn.png",
       newAccom.Name, newAccom.Address, "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
 
-    newAccom.Map = this.mapInfo;
+    newAccom.Latitude = this.latClick;
+    newAccom.Longtitude = this.lngClick;
+
     newAccom.AppUserId = parseInt(localStorage.getItem('userID'));
-    
+
     this.httpAccomodationService.postAccomodation(newAccom).subscribe(
       (co: any) => { this.getAll() },
       error => { alert("Unsuccessful insert operation!"); console.log(error); }
@@ -186,5 +193,10 @@ export class AccomodationComponent implements OnInit {
   oDataResponseParser(x: any) {
     //this.count = x["odata.count"];
     this.accoms = x as Accomodation[]
+  }
+
+  onclick(result: any) {
+    this.latClick = result.lat;
+    this.lngClick = result.lng;
   }
 }

@@ -71,7 +71,7 @@ const Routes = [
     AdminComponent,
     LogoutComponent,
     AccomodationListComponent,
-     MapComponent
+     MapComponent,
   ],
   imports: [
     BrowserModule,

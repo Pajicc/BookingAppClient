@@ -88,7 +88,7 @@
                     <div class="col-sm-8">
                         <div style="width:304px;height:228px;">
                             <map [mapInfo]="mapInfo"></map>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -143,13 +143,21 @@
                             <label for="AverageGrade">AverageGrade</label>
                             <input type="number" class="form-control" name="AverageGrade" max="5" min="0" ngModel>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="Latitude">Latitude</label>
                             <input type="text" class="form-control" name="Latitude" ngModel>
                         </div>
                         <div class="form-group">
                             <label for="Longtitude">Longtitude</label>
                             <input type="text" class="form-control" name="Longtitude" ngModel>
+                        </div>-->
+                        <div >
+                            <agm-map #f [latitude]="lat" [longitude]="lng" [zoom]="16" (mapClick)="onClick($event)" style="width:404px;height:300px;">
+                                <agm-marker [latitude]="latClick" [longitude]="lngClick" label=""></agm-marker>
+                            </agm-map>
+                        </div>
+                        <div class="form-group">
+                            <p>latitude: {{latClick}}, longitude: {{lngClick}}</p>
                         </div>
 
                         <div class="form-group">
