@@ -1,5 +1,7 @@
 //import { AccType } from '../accomodation-type/accomodation-type.model';
 
+import { MapInfo } from "../map/map-info.model";
+
 export class Accomodation {
 
     public Id: number;
@@ -20,11 +22,12 @@ export class Accomodation {
     public AppUserId: number;
 
     public AccomodationTypeId: number;
+    public Map: MapInfo;
 
     constructor(
         Id: number,
-        Name:string,
-        Description:string,
+        Name: string,
+        Description: string,
         Address: string,
         AverageGrade: number,
         Latitude: number,
@@ -33,8 +36,9 @@ export class Accomodation {
         Approved: boolean,
         PlaceId: number,
         AppUserId: number,
-        AccomodationTypeId: number
-    ){
+        AccomodationTypeId: number,
+        Map: MapInfo
+    ) {
         this.Id = Id;
         this.Name = Name;
         this.Description = Description;
@@ -47,5 +51,6 @@ export class Accomodation {
         this.PlaceId = PlaceId;
         this.AppUserId = AppUserId;
         this.AccomodationTypeId = AccomodationTypeId;
+        this.Map = Map;
     }
 }

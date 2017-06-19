@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
   providers: [HttpCountryService]
 })
 export class CountryComponent implements OnInit {
-
+errorMsg:string;
   countries: Object[];
   country: Country;
   id: number;
@@ -26,12 +26,19 @@ export class CountryComponent implements OnInit {
   }
 
   addCountry(newCountry: Country, form: NgForm): void {
+
+    if(!form.valid){
+      return;
+    }
     this.httpCountryService.postCountry(newCountry).subscribe(
       (co: any) => { this.ngOnInit() },
-      error => { alert("Unsuccessful insert operation!"); console.log(error); }
+     (error:any) =>{ this.errorMsg = error.json().Message;
+        console.log(error); }
     );
+
     form.reset();
   }
+
   deleteCountry(): void {
     this.httpCountryService.deleteCountry(this.id).subscribe(
       (co: any) => { this.ngOnInit() },
@@ -40,9 +47,11 @@ export class CountryComponent implements OnInit {
   }
 
   editCountry(): void {
+   
     this.httpCountryService.updateCountry(this.country).subscribe(
       (co: any) => { this.ngOnInit() },
-      error => { alert("Unsuccessful edit!"); console.log(error); }
+       (error:any) =>{ this.errorMsg = error.json().Message;
+        console.log(error); }
     );
   }
 

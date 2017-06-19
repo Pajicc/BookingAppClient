@@ -15,7 +15,7 @@ import { HttpCountryService } from "../services/http.country.service";
   ]
 })
 export class RegionComponent implements OnInit {
-
+errorMsg:string;
   region: Region;
   regions: Object[];
   country: Country;
@@ -42,7 +42,8 @@ id:number;
   addRegion(newRegion: Region, form: NgForm): void {
     this.httpRegionService.postRegion(newRegion).subscribe(
       (co: any) => { this.ngOnInit() },
-      error => { alert("Unsuccessful insert operation!"); console.log(error); }
+      (error:any) =>{ this.errorMsg = error.json().Message;
+        console.log(error); }
     );
     form.reset();
   }

@@ -51,8 +51,8 @@ export class HttpCommentService {
     updateComment(accId: number, appId:number, comm : Comment) : Observable<any>{
 
         const headers: Headers = new Headers();
-       // headers.append('Accept', 'application/json');
-        //headers.append('Content-type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
         //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();

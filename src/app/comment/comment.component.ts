@@ -73,6 +73,7 @@ export class CommentComponent implements OnInit {
   }
 
   editComment(): void {
+    
     this.httpCommentService.updateComment(this.accId,this.userId,this.comment).subscribe(
       (com: any) => { this.getAll() },
       error => { alert("Unsuccessful edit!"); console.log(error); }

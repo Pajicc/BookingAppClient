@@ -46,13 +46,16 @@
                         <div>
                             <label class="mr-sm-2" for="CountryId">country:</label>
                         </div>
-                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="CountryId" name="CountryId" ngModel>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="CountryId" name="CountryId" required ngModel>
                         <option *ngFor="let country of countries" value="{{country.Id}}">
                             {{country.Name}}
                             </option>
                         </select>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </form>
+                    <div [hidden]="!errorMsg" class="errorMsg">
+                {{errorMsg}}
+            </div>
                 </div>
             </div><br>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
