@@ -27,6 +27,7 @@ export class HttpCommentService {
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
+        headers.append('Authorization', 'Bearer ' +localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
@@ -40,7 +41,7 @@ export class HttpCommentService {
     deleteComment(accId: number, appId: number): Observable<any>
     {
         let header = new Headers();
-        //header.append('Authorization', 'Bearer ' + this.localStorageService.get('token'));
+         header.append('Authorization', 'Bearer ' +localStorage.getItem('token'));
 
         let opts = new RequestOptions();
         opts.headers = header;
@@ -53,7 +54,7 @@ export class HttpCommentService {
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
-        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;

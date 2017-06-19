@@ -27,6 +27,7 @@ export class HttpRoomService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'applicaton/json');
         headers.append('Content-type', 'application/json');
+        headers.append('Authorization', 'Bearer ' +localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
@@ -45,7 +46,7 @@ export class HttpRoomService{
      deleteRoom(id: number): Observable<any>
     {
         let header = new Headers();
-        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         let opts = new RequestOptions();
         opts.headers = header;
@@ -58,7 +59,7 @@ export class HttpRoomService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
-        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;

@@ -19,6 +19,13 @@ export class HttpAccomodationService{
 
     }
 
+    getNotApprovedAccomodations() : Observable<any> {
+        return this.http.get("http://localhost:54042/api/Accomodations?$filter=Approved eq false").map(this.extractData);
+    }
+    getApprovedAccomodations() : Observable<any> {
+        return this.http.get("http://localhost:54042/api/Accomodations?$filter=Approved eq true").map(this.extractData);
+    }
+
     private extractData(res:Response){
         let body = res.json();
         return body || [];
@@ -28,6 +35,7 @@ export class HttpAccomodationService{
         const headers : Headers = new Headers();
         headers.append('Accept', 'applicaton/json');
         headers.append('Content-type', 'application/json');
+        headers.append('Authorization', 'Bearer ' +localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;
@@ -52,7 +60,7 @@ export class HttpAccomodationService{
     deleteAccomodation(id: number): Observable<any>
     {
         let header = new Headers();
-        //header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         let opts = new RequestOptions();
         opts.headers = header;
@@ -65,7 +73,7 @@ export class HttpAccomodationService{
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-type', 'application/json');
-        //headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
         const opts: RequestOptions = new RequestOptions();
         opts.headers = headers;

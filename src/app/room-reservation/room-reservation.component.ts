@@ -50,7 +50,7 @@ export class RoomReservationComponent implements OnInit {
   }
 
   addRoomReservations(newRoomRes: RoomReservations, form: NgForm): void {
-    newRoomRes.AppUserId = 4;
+    newRoomRes.AppUserId = parseInt(localStorage.getItem('userID')); 
     newRoomRes.Timestamp=null;
     //newRoomRes.Timestamp = Date.now();
 

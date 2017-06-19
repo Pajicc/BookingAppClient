@@ -19,7 +19,7 @@
                     <a class="dropdown-item" [routerLink]="['/regions']">Regions</a>
                     <a class="dropdown-item" [routerLink]="['/rooms']">Rooms</a>
                     <a class="dropdown-item" [routerLink]="['/roomReservations']">Room Reservations</a>
-                    <a class="dropdown-item" [routerLink]="['/map']">map</a>
+                    <a *ngIf="isAdmin()" class="dropdown-item" [routerLink]="['/notApproved']">Not approved Accomodations</a>
                 </div>
             </div>
         </div>

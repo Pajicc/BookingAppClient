@@ -26,6 +26,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AccomodationListComponent } from './accomodation-list/accomodation-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+import { NotApprovedAccomodationComponent } from './accomodation/not-approved-accomodation/not-approved-accomodation.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -50,7 +51,8 @@ const Routes = [
   { path: "appUsers", component: AppUserComponent},
   { path: "rooms", component: RoomComponent},
   { path: "roomReservations", component: RoomReservationComponent},
-     { path: "map", component: MapComponent},
+  { path: "map", component: MapComponent},
+  { path: "notApproved", component: NotApprovedAccomodationComponent}
 ]
 
 @NgModule({
@@ -72,6 +74,7 @@ const Routes = [
     LogoutComponent,
     AccomodationListComponent,
      MapComponent,
+     NotApprovedAccomodationComponent,
   ],
   imports: [
     BrowserModule,

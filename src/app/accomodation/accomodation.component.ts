@@ -84,7 +84,8 @@ export class AccomodationComponent implements OnInit {
   }
 
   getAll() {
-    this.httpAccomodationService.getAccomodation().subscribe(
+    //this.httpAccomodationService.getAccomodation().subscribe(
+      this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (am: any) => { this.accoms = am; console.log(this.accoms) },
       error => { alert("Unsuccessful accomodation fetch operation!"); console.log(error); }
     );
@@ -104,8 +105,8 @@ export class AccomodationComponent implements OnInit {
 
   addAccomodation(newAccom: Accomodation, form: NgForm): void {
     newAccom.ImageURL = this.imgUrl;
-    newAccom.Approved = this.approved;
-
+    newAccom.Approved = false;
+    newAccom.AverageGrade = 0;
 
     this.mapInfo = new MapInfo(this.latClick, this.lngClick,
       "assets/ftn.png",
@@ -148,14 +149,15 @@ export class AccomodationComponent implements OnInit {
   }
 
 
-  chk(e) {
+  /*chk(e) {
     if (e.target.checked) {
       this.approved = true
     }
     else {
       this.approved = false
     }
-  }
+  }*/
+
   imageUploaded(e) {
     console.log(e);
     this.imgUrl = "http://localhost:54042/Content/AccImages/" + e.file.name;

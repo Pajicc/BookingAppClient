@@ -1,0 +1,24 @@
+ <div class="container-fluid">
+       
+        <ul class="list-inline center-block align-items-center">
+
+            <li class="text-left" *ngFor="let accom of accoms">
+                <div class="row">
+                    <hr>
+                    <div class="col-sm-3">
+                        <p>Name: {{accom.Name}}</p>
+                        <p>Description: {{accom.Description}}</p>
+                        <p>Address: {{accom.Address}}</p>
+                    </div>
+                     <div class="col-sm-3">
+                        <p><img src={{accom.ImageURL}} alt="Image" style="width:304px;height:228px;"></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-secondary" (click)="approveAccomodation(accom)" >Approve</button>
+                    </div><br><br>
+                    
+                </div>
+            </li>
+
+        </ul>
+    </div>
