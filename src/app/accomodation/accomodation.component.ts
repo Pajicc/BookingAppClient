@@ -89,7 +89,7 @@ export class AccomodationComponent implements OnInit {
 
   getAll() {
     //this.httpAccomodationService.getAccomodation().subscribe(
-      this.httpAccomodationService.getApprovedAccomodations().subscribe(
+    this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (am: any) => { this.accoms = am; console.log(this.accoms) },
       error => { alert("Unsuccessful accomodation fetch operation!"); console.log(error); }
     );
@@ -137,7 +137,13 @@ export class AccomodationComponent implements OnInit {
     );
   }
 
-  editAcc(): void {
+  editAcc(accom: Accomodation): void {
+    this.mapInfo = new MapInfo(this.latClick, this.lngClick,
+      "assets/ftn.png",
+      "", "", "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+    this.accom.Latitude = this.latClick;
+    this.accom.Longtitude = this.lngClick;
+
     this.httpAccomodationService.updateAccomodation(this.accom).subscribe(
       (at: any) => { this.getAll() },
       error => { alert("Unsuccessful edit!"); console.log(error); }
@@ -152,9 +158,9 @@ export class AccomodationComponent implements OnInit {
     this.accom = acc;
   }
 
-expandSearch(){
+  expandSearch() {
 
-    if(this.hiddenSearch === true)
+    if (this.hiddenSearch === true)
       this.hiddenSearch = false;
     else
       this.hiddenSearch = true;

@@ -1,24 +1,25 @@
-<form class="container" #f="ngForm" (ngSubmit)="register(f.value, f)">
+<form class="container" #f="ngForm" (ngSubmit)=" f.form.valid && register(f.value, f)" novalidate>
     <div class="form-group">
         <label for="Username">Username</label>
-        <input type="text" class="form-control" name="Username" placeholder="Username" ngModel>
+        <input type="text" class="form-control" name="Username" placeholder="Username" ngModel required>
+        
     </div>
     <div class="form-group">
         <label for="Lastname">Lastname</label>
-        <input type="text" class="form-control" name="Lastname" placeholder="Lastname" ngModel>
+        <input type="text" class="form-control" name="Lastname" placeholder="Lastname" ngModel required>
     </div>
     <div class="form-group">
         <label for="Password">Password</label>
-        <input type="password" class="form-control" name="Password" placeholder="Password" ngModel>
+        <input type="password" class="form-control" name="Password" placeholder="Password" ngModel required>
     </div>
     <div class="form-group">
         <label for="Email">Email</label>
-        <input type="text" class="form-control" name="Email" placeholder="e-mail" ngModel>
+        <input type="text" class="form-control" name="Email" placeholder="e-mail" ngModel required>
     </div>
 
     <div class="form-group">
         <label for="ConfirmPassword">Confirm password</label>
-        <input type="password" class="form-control" name="ConfirmPassword" ngModel>
+        <input type="password" class="form-control" name="ConfirmPassword" ngModel required>
     </div>
     <div class="form-check">
         <label class="form-check-label">

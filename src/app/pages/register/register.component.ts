@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
   providers: [RegisterService]
 })
 export class RegisterComponent implements OnInit {
-
+errorMsg:string;
   role: string;
   isChecked : boolean;
   toggledManager: boolean;
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   {
     form.reset();
     regDTO.Role = this.role;
-    this.registerService.register(regDTO).subscribe(x => { console.log(x); this.router.navigate(['/home']); }, x => alert('Failed to register'));
+    this.registerService.register(regDTO).subscribe(x => { console.log(x); this.router.navigate(['/home']); error=> {alert(error); console.log(error)}})
   }
 
   chkManager(e) 
