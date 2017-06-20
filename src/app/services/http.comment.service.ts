@@ -18,6 +18,21 @@ export class HttpCommentService {
         return this.http.get("http://localhost:54042/api/Comments").map(this.extractData);
     }
 
+    getCommentById(userId : number, accId: number) : Observable<any> {
+        return this.http.get(`http://localhost:54042/api/Comments/${userId}/${accId}`);
+    }
+
+    getCommentsForAcc(id: number): Observable<any> {
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return this.http.get(`http://localhost:54042/api/Comments/${id}`, opts).map(this.extractData);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || [];

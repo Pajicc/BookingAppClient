@@ -6,6 +6,7 @@ export class RoomReservations {
     public Timestamp: Date;
     public AppUserId: number;
     public RoomId: number;
+    public Canceled: boolean;
 
     constructor(
         Id: number,
@@ -13,7 +14,8 @@ export class RoomReservations {
         EndDate: Date,
         Timestamp: Date,
         AppUserId: number,
-        RoomId: number
+        RoomId: number,
+        Canceled: boolean
     ) {
         this.Id = Id;
         this.StartDate = StartDate;
@@ -21,5 +23,6 @@ export class RoomReservations {
         this.Timestamp = Timestamp;
         this.AppUserId = AppUserId;
         this.RoomId = RoomId;
+        this.Canceled = Canceled;
     }
 }

@@ -29,6 +29,8 @@ export class RoomReservationComponent implements OnInit {
   userId: number;
   roomId: number;
 
+   errorMsg: string;
+
   constructor(private httpRoomReservationService: HttpRoomReservationService,
     private httpRoomService: HttpRoomService, private httpAppUserService: HttpAppUserService) { }
 
@@ -37,7 +39,7 @@ export class RoomReservationComponent implements OnInit {
   }
 
   getAll() {
-    this.httpRoomReservationService.getRoomReservations().subscribe(
+    this.httpRoomReservationService.getNotCanceledRoomRes().subscribe(
       (rr: any) => { this.roomRess = rr; console.log(this.roomRess) },
       error => { alert("Unsuccessful fetch operation!"); console.log(error); }
     );
@@ -52,6 +54,7 @@ export class RoomReservationComponent implements OnInit {
   addRoomReservations(newRoomRes: RoomReservations, form: NgForm): void {
     newRoomRes.AppUserId = parseInt(localStorage.getItem('userID')); 
     newRoomRes.Timestamp=null;
+    newRoomRes.Canceled = false;
     //newRoomRes.Timestamp = Date.now();
 
     this.httpRoomReservationService.postRoomReservations(newRoomRes).subscribe(
@@ -64,7 +67,11 @@ export class RoomReservationComponent implements OnInit {
   deleteRoomRes(): void {
     this.httpRoomReservationService.deleteRoomRes(this.id).subscribe(
       (ro: any) => { this.getAll() },
-      error => { alert("Unsuccessful delete!"); console.log(error); }
+      
+      (error: any) => {
+        this.errorMsg = error.json().Message;
+        console.log(error);
+      }
     );
   }
 

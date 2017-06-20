@@ -10,15 +10,18 @@
         <div class="card card-block">
             <ul class="list-inline center-block align-items-center">
 
-                <li *ngFor="let roomRes of roomResss">
-                    <p>Start date: {{roomRes.StartDate}}</p>
-                    <p>End date: {{roomRes.EndDate</p>
+                <li *ngFor="let roomRes of roomRess">
+                    <p>Start date: {{roomRes.StartDate}} </p>
+                    <p>End date: {{roomRes.EndDate}}</p>
                     <p>Room: {{roomRes.RoomId}}</p>
+                    <div [hidden]="!errorMsg" class="errorMsg">
+                        {{errorMsg}}
+                    </div>
                     <a role="button" (click)="setId(roomRes.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delRoomRessModal" aria-expanded="false"
                         class="pull-right">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </a>
-                    <a role="button" (click)="setRoomRess(accom)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editRoomResModal"
+                    <a role="button" (click)="setRoomRes(roomRes)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editRoomResModal"
                         class="pull-right">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a><br>
@@ -29,7 +32,7 @@
     </div>
 </nav>
 
-<!-- Add acc modal -->
+<!-- Add room res modal -->
 
 <div class="modal fade" id="addRoomResModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -64,6 +67,58 @@
                 </div>
             </div>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete roomRes modal -->
+<div class="modal fade" id="delRoomRessModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLabel">Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel this room reservation?
+            </div>
+            <button type="button" class="btn btn-primary" (click)="deleteRoomRes()" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit roomRes modal -->
+
+<div class="modal fade" id="editRoomResModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Edit</h4>
+            </div>
+            <div class="modal-body">
+           <!--   <form class="container" #f1="ngForm" (ngSubmit)="editAcc(f1.value, f1)"> -->
+                    <div *ngIf="roomRes != null" >
+                        <label for="StartDate">StartDate</label>
+                        <input type="date" class="form-control" name="StartDate" [(ngModel)]="roomRes.StartDate"><br>
+                        <label for="EndDate">StartDate</label>
+                        <input type="date" class="form-control" name="EndDate" [(ngModel)]="roomRes.EndDate"><br>
+                       <!-- <label for="RoomId">RoomId</label>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="RoomId" name="RoomId" [(ngModel)]="roomRes.RoomId">
+                            <option *ngFor="let room of rooms" value="{{room.RoomId}}">{{room.RoomNumber}}</option>
+                        </select>-->
+                      </div><br>
+
+                    <button type="submit" (click)="editRoomRes()" class="btn btn-primary" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+             <!--    </form> -->
+            </div>          
         </div>
     </div>
 </div>

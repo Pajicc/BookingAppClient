@@ -1,0 +1,30 @@
+<div class="row">
+    <hr>
+    
+    <div class="col-sm-3">
+        <p>Name: {{accom.Name}}</p>
+        <p>Description: {{accom.Description}}</p>
+        <p>Address: {{accom.Address}}</p>
+        <p>AvrgeGrade: {{accom.AverageGrade}}</p><br>
+        
+        <p><button role="button" class="btn btn-outline-info" (click)="showComments()" >
+            Show comments
+        </button></p>
+        <p *ngIf="hiddenComments">
+            <app-comment [accomodationId]="accom.Id"></app-comment>
+        </p>
+        <!-- <p>Latitude: {{accom.Latitude}}</p>
+        <p>Longitude: {{accom.Longtitude}}</p>
+        <p>AccommodationTypeId: {{accom.AccomodationTypeId}}</p>-->
+    </div>
+    <div class="col-sm-3">
+        <p><img src={{accom.ImageURL}} alt="Image" style="width:330px;height:300px;"></p>
+    </div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3">
+        <agm-map [latitude]=accom.Latitude [longitude]=accom.Longtitude [zoom]="16" style="width:300px;height:300px;">
+            <agm-marker [latitude]=accom.Latitude [longitude]=accom.Longtitude  label=""></agm-marker>
+        </agm-map>
+    </div> 
+                                              
+</div><br>

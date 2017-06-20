@@ -34,7 +34,7 @@ export class RoomComponent implements OnInit {
       (ro: any) => { this.rooms = ro; console.log(this.rooms) },
       error => { alert("Unsuccessful fetch operation!"); console.log(error); }
     );
-    this.httpAccomodationService.getAccomodation().subscribe(
+    this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (acc: any) => { this.accoms = acc; console.log(this.accoms) }
     );
   }

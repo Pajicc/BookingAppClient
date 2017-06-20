@@ -36,7 +36,7 @@ import { AgmCoreModule } from '@agm/core';
 export class AccomodationComponent implements OnInit {
   mapInfo: MapInfo;
   approved: boolean;
-  accom: Accomodation;
+  public accom: Accomodation;
   accoms: Accomodation[];
   place: Place;
   places: Object[];
@@ -56,7 +56,9 @@ export class AccomodationComponent implements OnInit {
 
   imgUrl: string;
 
-  id: number;
+  hiddenSearch: boolean;
+
+  public id: number;
   accName: string;
   show: boolean;
 
@@ -76,7 +78,9 @@ export class AccomodationComponent implements OnInit {
     private authService: AuthService,
     private searchODataService: SearchService) {
     this.imgUrl = "";
+    this.hiddenSearch = false;
     this.mapInfo = {} as MapInfo;
+    this.accom = null;
   }
 
   ngOnInit() {
@@ -148,6 +152,13 @@ export class AccomodationComponent implements OnInit {
     this.accom = acc;
   }
 
+expandSearch(){
+
+    if(this.hiddenSearch === true)
+      this.hiddenSearch = false;
+    else
+      this.hiddenSearch = true;
+  }
 
   /*chk(e) {
     if (e.target.checked) {
@@ -172,6 +183,10 @@ export class AccomodationComponent implements OnInit {
 
   isManager(): boolean {
     return this.authService.isUserManager();
+  }
+
+  isUser(): boolean {
+    return this.authService.isUserAppUser();
   }
 
   searchAccomodations(searchParams: SearchModel, form: NgForm) {

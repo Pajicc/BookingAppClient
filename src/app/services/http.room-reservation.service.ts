@@ -16,6 +16,11 @@ export class HttpRoomReservationService{
     getRoomReservations():Observable<any>{
         return this.http.get("http://localhost:54042/api/RoomReservations").map(this.extractData);
     }
+
+    getNotCanceledRoomRes() : Observable<any> {
+        return this.http.get("http://localhost:54042/api/RoomReservations?$filter=Canceled eq false").map(this.extractData);
+    }
+
      private extractData(res: Response) {
         let body = res.json();
         return body || [];
@@ -37,7 +42,9 @@ export class HttpRoomReservationService{
             StartDate: roomRes.StartDate,
             EndDate: roomRes.EndDate,
             AppUserId: roomRes.AppUserId,
-            RoomId: roomRes.RoomId
+            RoomId: roomRes.RoomId,
+            Timestamp: roomRes.Timestamp,
+            Canceled: roomRes.Canceled
             }
         ), opts);
     }

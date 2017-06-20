@@ -23,10 +23,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { Comment } from './comment/comment.model';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AccomodationListComponent } from './accomodation-list/accomodation-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 import { NotApprovedAccomodationComponent } from './accomodation/not-approved-accomodation/not-approved-accomodation.component';
+import { AccomodationDetailedComponent } from './accomodation-detailed/accomodation-detailed.component';
+import { AddRoomReservationComponent } from './add-room-reservation/add-room-reservation.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -52,7 +53,8 @@ const Routes = [
   { path: "rooms", component: RoomComponent},
   { path: "roomReservations", component: RoomReservationComponent},
   { path: "map", component: MapComponent},
-  { path: "notApproved", component: NotApprovedAccomodationComponent}
+  { path: "notApproved", component: NotApprovedAccomodationComponent},
+   { path: "addRoomReservation/:id", component: AddRoomReservationComponent}
 ]
 
 @NgModule({
@@ -72,9 +74,10 @@ const Routes = [
     RegisterComponent,
     AdminComponent,
     LogoutComponent,
-    AccomodationListComponent,
      MapComponent,
      NotApprovedAccomodationComponent,
+     AccomodationDetailedComponent,
+     AddRoomReservationComponent,
   ],
   imports: [
     BrowserModule,
