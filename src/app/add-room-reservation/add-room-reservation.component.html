@@ -1,15 +1,15 @@
  <div class="card card-block">
     <form class="container" #f="ngForm" (ngSubmit)="addRoomReservations(f.value, f)">
         <div class="form-group">
-            <label for="StartDate">StartDate</label>
+            <label for="StartDate">Start Date</label>
             <input type="date" class="form-control" name="StartDate" ngModel>
         </div>
         <div class="form-group">
-            <label for="EndDate">EndDate</label>
+            <label for="EndDate">End Date</label>
             <input type="date" class="form-control" name="EndDate" ngModel>
         </div>
         <div class="form-group">
-            <label for="RoomId">RoomId</label>
+            <label for="RoomId">Room number:</label>
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="RoomId" name="RoomId" ngModel>
             <option *ngFor="let room of rooms" value="{{room.Id}}">{{room.RoomNumber}}</option>
             </select>
