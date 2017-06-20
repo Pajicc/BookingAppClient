@@ -21,6 +21,18 @@ export class HttpRoomReservationService{
         return this.http.get("http://localhost:54042/api/RoomReservations?$filter=Canceled eq false").map(this.extractData);
     }
 
+    getRoomResForUser(id: number): Observable<any> {
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+       // headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return this.http.get(`http://localhost:54042/api/RoomReservations/user/${id}`, opts).map(this.extractData);
+    }
+
      private extractData(res: Response) {
         let body = res.json();
         return body || [];

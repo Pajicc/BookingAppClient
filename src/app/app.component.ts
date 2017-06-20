@@ -38,4 +38,5 @@ export class AppComponent {
   userLogout() {
     this.authService.logOut().subscribe(x => { localStorage.clear(); this.router.navigate(['/home']); });
   }
+
 }

@@ -189,6 +189,15 @@ expandSearch(){
     return this.authService.isUserAppUser();
   }
 
+  isManagersAccom(accom: Accomodation): boolean{
+    if(this.isManager()){
+      if(parseInt(localStorage.getItem('userID')) == accom.AppUserId){  //ako je manager, i ako je njegov smestaj
+        return true;
+      }
+    }
+    return false;
+  }
+
   searchAccomodations(searchParams: SearchModel, form: NgForm) {
     //this.searchParamsSave = new SearchModel(searchParams.Name,searchParams.Country,searchParams.Region,searchParams.Place,searchParams.AccomodationType,searchParams.BedCount,searchParams.Grade,searchParams.PriceMin,searchParams.PriceMax);
     this.searchODataService.generateQuery(searchParams).subscribe(x => this.oDataResponseParser(x));

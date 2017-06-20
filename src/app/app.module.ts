@@ -28,6 +28,7 @@ import { MapComponent } from './map/map.component';
 import { NotApprovedAccomodationComponent } from './accomodation/not-approved-accomodation/not-approved-accomodation.component';
 import { AccomodationDetailedComponent } from './accomodation-detailed/accomodation-detailed.component';
 import { AddRoomReservationComponent } from './add-room-reservation/add-room-reservation.component';
+import { AddRoomComponent } from './add-room/add-room.component';
 
 /*const ChildRoutes = [
    {path: "country", component: CountryComponent},
@@ -50,11 +51,12 @@ const Routes = [
   { path: "comments", component: CommentComponent},
   { path: "regions", component: RegionComponent},
   { path: "appUsers", component: AppUserComponent},
-  { path: "rooms", component: RoomComponent},
+  { path: "rooms/:id", component: RoomComponent},
   { path: "roomReservations", component: RoomReservationComponent},
   { path: "map", component: MapComponent},
   { path: "notApproved", component: NotApprovedAccomodationComponent},
-   { path: "addRoomReservation/:id", component: AddRoomReservationComponent}
+  { path: "addRoomReservation/:id", component: AddRoomReservationComponent},
+  { path: "addRoom/:id", component: AddRoomComponent}
 ]
 
 @NgModule({
@@ -78,6 +80,7 @@ const Routes = [
      NotApprovedAccomodationComponent,
      AccomodationDetailedComponent,
      AddRoomReservationComponent,
+     AddRoomComponent
   ],
   imports: [
     BrowserModule,

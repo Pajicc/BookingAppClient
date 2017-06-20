@@ -5,7 +5,10 @@ import { HttpRoomService } from "app/services/http.room.service";
 import { Room } from '../room/room.model';
 import { Accomodation } from "../accomodation/accomodation.model";
 import { HttpAccomodationService } from "../services/http.accomodation.service";
-
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -20,19 +23,22 @@ export class RoomComponent implements OnInit {
   rooms: Object[];
   accom: Accomodation;
   accoms: Object[];
-  id: number;
+  roomId: number;
+  id: string = "-1";
 
   constructor(
-    private httpRoomService: HttpRoomService, private httpAccomodationService: HttpAccomodationService) { }
+    private httpRoomService: HttpRoomService, private httpAccomodationService: HttpAccomodationService,
+    private router: Router, private activatedRoute: ActivatedRoute) { 
+    activatedRoute.params.subscribe(params => {this.id = params["id"]}); }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.httpRoomService.getRooms().subscribe(
-      (ro: any) => { this.rooms = ro; console.log(this.rooms) },
-      error => { alert("Unsuccessful fetch operation!"); console.log(error); }
+    this.httpRoomService.getRoomsForAcc(parseInt(this.id)).subscribe(
+      (co: any) => { this.rooms = co; },
+      error => { alert("Unsuccessful insert operation!"); console.log(error); }
     );
     this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (acc: any) => { this.accoms = acc; console.log(this.accoms) }
@@ -40,6 +46,9 @@ export class RoomComponent implements OnInit {
   }
 
   addRoom(newRoom: Room, form: NgForm): void {
+
+    newRoom.AccomodationId = parseInt(this.id);
+
     this.httpRoomService.postRoom(newRoom).subscribe(
       (co: any) => { this.ngOnInit() },
       error => { alert("Unsuccessful insert operation!"); console.log(error); }
@@ -48,7 +57,7 @@ export class RoomComponent implements OnInit {
   }
 
   deleteRoom(): void {
-    this.httpRoomService.deleteRoom(this.id).subscribe(
+    this.httpRoomService.deleteRoom(this.roomId).subscribe(
       (ro: any) => { this.getAll() },
       error => { alert("Unsuccessful delete!"); console.log(error); }
     );
@@ -62,7 +71,7 @@ export class RoomComponent implements OnInit {
   }
 
   setId(id: number) {
-    this.id = id;
+    this.roomId = id;
   }
 
   setRoom(rr: Room) {

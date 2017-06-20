@@ -7,7 +7,10 @@ import { HttpAppUserService } from "../services/http.app-user.service";
 import { HttpRoomService } from "../services/http.room.service";
 import { Room } from "../room/room.model";
 import { AppUser } from "../app-user/app-user.model";
-
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
 @Component({
   selector: 'app-room-reservation',
   templateUrl: './room-reservation.component.html',
@@ -25,33 +28,38 @@ export class RoomReservationComponent implements OnInit {
   appUser: AppUser;
   appUsers: Object[];
 
-  id: number;
+  //id: string = "-1";
+
+  roomResid: number;
   userId: number;
   roomId: number;
 
    errorMsg: string;
 
-  constructor(private httpRoomReservationService: HttpRoomReservationService,
-    private httpRoomService: HttpRoomService, private httpAppUserService: HttpAppUserService) { }
+  constructor(//private router: Router, private activatedRoute: ActivatedRoute,
+  private httpRoomReservationService: HttpRoomReservationService,
+    private httpRoomService: HttpRoomService, private httpAppUserService: HttpAppUserService) { 
+       //activatedRoute.params.subscribe(params => {this.id = params["id"]});
+    }
 
   ngOnInit() {
     this.getAll();
   }
 
   getAll() {
-    this.httpRoomReservationService.getNotCanceledRoomRes().subscribe(
+    this.httpRoomReservationService.getRoomResForUser(parseInt(localStorage.getItem('userID'))).subscribe(
       (rr: any) => { this.roomRess = rr; console.log(this.roomRess) },
       error => { alert("Unsuccessful fetch operation!"); console.log(error); }
     );
-    this.httpRoomService.getRooms().subscribe(
+    /*this.httpRoomService.getRoomsForAcc(parseInt(this.id)).subscribe(
       (ro: any) => { this.rooms = ro; console.log(this.rooms) }
-    );
-    this.httpAppUserService.getAppUsers().subscribe(
-      (au: any) => { this.appUsers = au; console.log(this.appUsers) }
-    );
+    );*/
+    /*this.httpRoomService.getRooms().subscribe(
+      (ro: any) => { this.rooms = ro; console.log(this.rooms) }
+    );*/
   }
 
-  addRoomReservations(newRoomRes: RoomReservations, form: NgForm): void {
+  /*addRoomReservations(newRoomRes: RoomReservations, form: NgForm): void {
     newRoomRes.AppUserId = parseInt(localStorage.getItem('userID')); 
     newRoomRes.Timestamp=null;
     newRoomRes.Canceled = false;
@@ -62,10 +70,10 @@ export class RoomReservationComponent implements OnInit {
       error => { alert("Unsuccessful insert operation!"); console.log(error); }
     );
     form.reset();
-  }
+  }*/
 
   deleteRoomRes(): void {
-    this.httpRoomReservationService.deleteRoomRes(this.id).subscribe(
+    this.httpRoomReservationService.deleteRoomRes(this.roomResid).subscribe(
       (ro: any) => { this.getAll() },
       
       (error: any) => {
@@ -83,7 +91,7 @@ export class RoomReservationComponent implements OnInit {
   }
 
   setId(id: number) {
-    this.id = id;
+    this.roomResid = id;
   }
 
   setRoomRes(rr: RoomReservations) {

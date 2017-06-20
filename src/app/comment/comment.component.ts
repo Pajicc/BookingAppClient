@@ -39,7 +39,8 @@ export class CommentComponent implements OnInit {
   constructor(private httpCommentService: HttpCommentService,
     private httpAccomodationService: HttpAccomodationService,
     private httpAppUserService: HttpAppUserService,
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+    }
 
   ngOnInit() {
     this.getAll();
@@ -51,16 +52,16 @@ export class CommentComponent implements OnInit {
         (co: any) => { this.comments = co; console.log(this.comments) },
         error => { alert("Unsuccessful fetch operation!"); console.log(error); }
          );
-
         //this.comment = null;
 
     this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (acc: any) => { this.accoms = acc; console.log(this.accoms) }
     );
-    this.httpAppUserService.getAppUsers().subscribe(
+    /*this.httpAppUserService.getAppUsers().subscribe(
       (au: any) => { this.appUsers = au; console.log(this.appUsers) }
-    );
+    );*/
   }
+
 
   addComment(newComment: Comment, form: NgForm): void {
     newComment.AppUserId = parseInt(localStorage.getItem('userID'));  //setuj comment id usera koji je ulogovan
@@ -106,6 +107,9 @@ export class CommentComponent implements OnInit {
       return true;
     else
       return false;
+  }
+  isAppUser(): boolean{
+    return this.authService.isUserAppUser();
   }
 
 }

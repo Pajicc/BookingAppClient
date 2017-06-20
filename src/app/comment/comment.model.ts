@@ -1,4 +1,4 @@
-import{Accomodation} from '../accomodation/accomodation.model';
+import { AppUser } from "../app-user/app-user.model";
 
 export class Comment {
 
@@ -7,7 +7,7 @@ export class Comment {
     public Text: string;
     public AccomodationId: number;
     public AppUserId: number;
-
+    public AppUser: AppUser;
     constructor(
         Id: number,
          Grade: number,

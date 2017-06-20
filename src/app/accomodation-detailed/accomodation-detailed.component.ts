@@ -27,5 +27,4 @@ showComments(){
     else
       this.hiddenComments = true;
   }
-
 }

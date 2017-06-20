@@ -4,7 +4,7 @@
 
         <a class="navbar-brand d-flex mx-auto" routerLink="home">Home</a>
 
-        <div class="container-fluid" ><!--*ngIf="isAdmin()"-->
+        <div class="container-fluid" *ngIf="isAdmin()"><!--*ngIf="isAdmin()"-->
             <div class="dropdown">
                 <a class="navbar-brand d-flex mx-auto" href="#entities" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Entities
@@ -17,17 +17,19 @@
                     <a class="dropdown-item" [routerLink]="['/countries']">Countries</a>
                     <a class="dropdown-item" [routerLink]="['/places']">Places</a>
                     <a class="dropdown-item" [routerLink]="['/regions']">Regions</a>
-                    <a class="dropdown-item" [routerLink]="['/rooms']">Rooms</a>
-                    <a class="dropdown-item" [routerLink]="['/roomReservations']">Room Reservations</a>
+                    <!--<a class="dropdown-item" [routerLink]="['/rooms']">Rooms</a>
+                    <a class="dropdown-item" [routerLink]="['/roomReservations']">Room Reservations</a>-->
                     <a *ngIf="isAdmin()" class="dropdown-item" [routerLink]="['/notApproved']">Not approved Accomodations</a>
                 </div>
             </div>
         </div>
 
+         <a *ngIf="isUserLoggedIn() &&  isAppUser()" class="navbar-brand d-flex mx-auto" [routerLink]="['/roomReservations']">My Room reservations</a>
+
         <ul class="navbar-nav ml-auto" >
             <li *ngIf="!isUserLoggedIn()"><a class="nav-item" class="nav-link" [routerLink]="['/register']">Register <i class="fa fa-1x fa-user-plus" ></i></a></li>
             <li *ngIf="!isUserLoggedIn()"><a class="nav-item" class="nav-link" [routerLink]="['/login']">Login <i class="fa fa-1x fa-sign-in"s></i></a></li>
-            <li *ngIf="isUserLoggedIn()"><a class="nav-item" class="nav-link"> <button class="btn btn-danger btn-sm" (click)="userLogout()">Logout</button> </a></li>
+            <li *ngIf="isUserLoggedIn()"><a class="nav-item" class="nav-link"> <button class="btn btn-danger btn-sm" (click)="userLogout()">Logout</button> </a></li>         
         </ul>
     </div>  
 </nav>

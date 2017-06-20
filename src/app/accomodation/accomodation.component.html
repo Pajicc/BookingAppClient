@@ -62,9 +62,9 @@
     </div><br><br><br><br>
 
     <div class="container-fluid" *ngIf="isManager()">
-        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addAccModal" aria-expanded="false">
+        <button class="btn btn-info btn-lg" type="button" data-toggle="modal" data-target="#addAccModal" aria-expanded="false">
            Add Accomodation 
-        </button><br><br>
+        </button><br><br><br><br>
     </div>
     <div class="container-fluid">
         <!--<h3>Accomodations</h3><br><br>>-->
@@ -72,12 +72,10 @@
 
             <li class="text-left" *ngFor="let accom of accoms">
                 <app-accomodation-detailed [accom]="accom"></app-accomodation-detailed>
-                 <div class="row" *ngIf="isUser()"><div class="col-sm-3">  </div>
-                    <div class="col-sm-8">            
-                        <button class="btn btn-info btn-lg btn-block"[routerLink]="['/addRoomReservation', accom.Id]">Room reservation</button>
-                    </div>
-                 </div>
-                <div class="row" *ngIf="isManager()"><div class="col-sm-8"></div>
+                <div class="row" *ngIf="isManagersAccom(accom)"><div class="col-sm-3"></div>
+                    <div class="col-sm-7" >
+                         <button class="btn btn-info btn-lg btn-block"[routerLink]="['/rooms', accom.Id]">Rooms</button>  
+                     </div>  
                    <div class="col-sm-1"> 
                     <p>Delete <a role="button" (click)="setId(accom.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delAccModal" aria-expanded="false">
                         <i class="fa fa-2x fa-times" aria-hidden="true"></i>
@@ -87,8 +85,14 @@
                         <p>Edit <a role="button" (click)="setAcc(accom)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editAccModal">
                             <i class="fa fa-2x fa-pencil-square-o" aria-hidden="true"></i>
                         </a></p>
-                    </div>
-                </div><br><br><br><br><br><br>
+                    </div>         
+                </div><br><br>
+                 <div class="row" ><div class="col-sm-3">  </div>
+                    <div class="col-sm-8" >            
+                        <button *ngIf="isUser()" class="btn btn-info btn-lg btn-block"[routerLink]="['/addRoomReservation', accom.Id]">Room reservation</button>                      
+                    </div>           
+                 </div>
+                <br><br><br><br><br><br>
             </li>
         </ul>
     </div>
