@@ -18,6 +18,18 @@ export class HttpRoomService{
 
     }
 
+     getRoomById(id: number): Observable<any> {
+        const headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Content-type', 'application/json');
+       // headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+
+        const opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        return this.http.get(`http://localhost:54042/api/Rooms/${id}`, opts).map(this.extractData);
+    }
+
     getRoomsForAcc(id: number): Observable<any> {
         const headers: Headers = new Headers();
         headers.append('Accept', 'application/json');

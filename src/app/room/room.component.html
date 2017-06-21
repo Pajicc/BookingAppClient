@@ -1,22 +1,18 @@
 <nav class="navbar navbar-default">
 
-    <div class="container-fluid">
+    <div class="container-fluid" *ngIf="isManager()">
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#addRoomModal" aria-expanded="false">
            Add room
         </button><br><br>
     </div>
     <div class="container-fluid">
         <h3>Rooms</h3>
-        <div class="card card-block">
+        <div class="card card-block" *ngIf="rooms != null">
             <ul class="list-inline center-block align-items-center">
                 <li class="list-group-item" *ngFor="let room of rooms">
-                    <p>Number: {{room.RoomNumber}} <br>
-                    Number of beds: {{room.BedCount}}<br>
-                     Description: {{room.Description}}<br>
-                     Price per night: {{room.PricePerNight}}<br>
-                    </p>
+                    <app-room-detailed [room]="room"></app-room-detailed>
 
-                    <div class="col">
+                    <div class="col" *ngIf="isManager()">
                         <a role="button" (click)="setId(room.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delRoomModal" aria-expanded="false"
                             class="pull-right">
                             <i class="fa fa-times" aria-hidden="true"></i>

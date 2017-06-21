@@ -70,7 +70,7 @@ errorMsg:string;
   }
 
   clicked(country: Country): void {
-    alert(country.Name);
+    //alert(country.Name);
   }
 
 }

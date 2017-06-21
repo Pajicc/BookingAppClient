@@ -10,9 +10,15 @@
         </div>
         <div class="form-group">
             <label for="RoomId">Room number:</label>
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="RoomId" name="RoomId" ngModel>
+            <select (change)="loadRoom($event.target.value)" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="RoomId" name="RoomId" ngModel>
             <option *ngFor="let room of rooms" value="{{room.Id}}">{{room.RoomNumber}}</option>
             </select>
+        </div>
+         <div *ngIf="room != null">
+             <app-room-detailed [room]="room"></app-room-detailed>
+         </div>
+         <div [hidden]="!errorMsg" class="errorMsg">
+            {{errorMsg}}
         </div>
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>

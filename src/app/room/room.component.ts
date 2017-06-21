@@ -5,6 +5,7 @@ import { HttpRoomService } from "app/services/http.room.service";
 import { Room } from '../room/room.model';
 import { Accomodation } from "../accomodation/accomodation.model";
 import { HttpAccomodationService } from "../services/http.accomodation.service";
+import { AuthService } from "../services/auth.service";
 import {
   Router,
   ActivatedRoute
@@ -15,7 +16,7 @@ import {
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css'],
   providers: [
-    HttpRoomService, HttpAccomodationService]
+    HttpRoomService, HttpAccomodationService, AuthService]
 })
 export class RoomComponent implements OnInit {
 
@@ -28,17 +29,28 @@ export class RoomComponent implements OnInit {
 
   constructor(
     private httpRoomService: HttpRoomService, private httpAccomodationService: HttpAccomodationService,
-    private router: Router, private activatedRoute: ActivatedRoute) { 
+    private router: Router, private activatedRoute: ActivatedRoute,
+    private authService: AuthService) { 
     activatedRoute.params.subscribe(params => {this.id = params["id"]}); }
 
   ngOnInit() {
-    this.getAll();
+    if(this.isManager())
+      this.getAll();
+
+    if(this.isAdmin())
+        this.getAllForAdmin();
+  }
+  getAllForAdmin(){
+   this.httpRoomService.getRooms().subscribe(
+      (co: any) => { this.rooms = co; },
+      error => { alert("Unsuccessful fetch operation!"); console.log(error); }
+    );
   }
 
   getAll() {
     this.httpRoomService.getRoomsForAcc(parseInt(this.id)).subscribe(
       (co: any) => { this.rooms = co; },
-      error => { alert("Unsuccessful insert operation!"); console.log(error); }
+      error => { alert("Unsuccessful fetch operation!"); console.log(error); }
     );
     this.httpAccomodationService.getApprovedAccomodations().subscribe(
       (acc: any) => { this.accoms = acc; console.log(this.accoms) }
@@ -81,5 +93,16 @@ export class RoomComponent implements OnInit {
   onPost(res: any): void {
     alert("Post!");
     console.log(res.json());
+  }
+  isAdmin(): boolean {
+    return this.authService.isUserAdmin();
+  }
+
+  isManager(): boolean {
+    return this.authService.isUserManager();
+  }
+
+  isUser(): boolean {
+    return this.authService.isUserAppUser();
   }
 }

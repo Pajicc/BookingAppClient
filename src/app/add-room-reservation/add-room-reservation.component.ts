@@ -22,6 +22,8 @@ export class AddRoomReservationComponent implements OnInit {
 
   id: string = "-1";
   rooms: Room[];
+  room: Room;
+  errorMsg: string;
 
  constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private httpRoomReservationService: HttpRoomReservationService,
@@ -43,11 +45,20 @@ export class AddRoomReservationComponent implements OnInit {
     //newRoomRes.Timestamp = Date.now();
 
     this.httpRoomReservationService.postRoomReservations(newRoomRes).subscribe(
-      (co: any) => { this.ngOnInit() },
-      error => { alert("Unsuccessful insert operation!"); console.log(error); }
+      (co: any) => { alert("Successfully reserved") },
+      
+      (error: any) => {
+        this.errorMsg = error.json().Message;
+        console.log(error);
+      }
     );
     form.reset();
   }
 
+  loadRoom(roomId: number){
+    this.httpRoomService.getRoomById(roomId).subscribe(
+      (ro: any) => { this.room = ro; console.log(this.room) }
+    );
+  }
 
 }

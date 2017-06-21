@@ -1,27 +1,12 @@
-<p>
-    Add App User
-</p>
-<div>
-    <ul>
-        <li *ngFor="let appUser of appUsers">{{appUser.Username}}</li>
-    </ul>
+<div class="container-fluid">
+        <h3>Users</h3>
+        <div class="card card-block">
+            <ul class="list-inline center-block align-items-center">
+                <li *ngFor="let appUser of appUsers" class="text-left ">
+                    <p>Name: {{appUser.Name}}</p>
+                    <p>Lastname: {{appUser.Lastname}}</p>                   
+                    <br>
+                </li>
+            </ul>
+        </div>
 </div>
-
-<form #f="ngForm" (ngSubmit)="addAppUser(f.value, f)">
-
-    <div>
-        <label for="Username">Username</label>
-        <input type="text" name="Username" ngModel>
-    </div>
-
-    <div>
-        <label for="Password">Password</label>
-        <input type="text" name="Password" ngModel>
-    </div>
-
-    <div>
-        <label for="Email">Email</label>
-        <input type="text" name="Email" ngModel>
-    </div>
-    <input type="submit" />
-</form>

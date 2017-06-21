@@ -122,7 +122,7 @@ export class AccomodationComponent implements OnInit {
     newAccom.AppUserId = parseInt(localStorage.getItem('userID'));
 
     this.httpAccomodationService.postAccomodation(newAccom).subscribe(
-      (co: any) => { this.getAll() },
+      (co: any) => { this.getAll(); alert("Accomodation successfully created") },
       error => { alert("Unsuccessful insert operation!"); console.log(error); }
     );
     form.reset();

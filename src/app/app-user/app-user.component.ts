@@ -28,13 +28,4 @@ export class AppUserComponent implements OnInit {
     );
   }
 
-  addAppUser(newAppUser:AppUser, form: NgForm):void{
-    this.httpAppUserService.postAppUser(newAppUser).subscribe(this.onPost);
-  }
-
-onPost(res:any):void{
-  alert('Post!');
-  console.log(res.json());
-}
-
 }

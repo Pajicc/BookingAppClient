@@ -7,6 +7,7 @@ import { HttpAppUserService } from "../services/http.app-user.service";
 import { HttpRoomService } from "../services/http.room.service";
 import { Room } from "../room/room.model";
 import { AppUser } from "../app-user/app-user.model";
+import { AuthService } from "../services/auth.service";
 import {
   Router,
   ActivatedRoute
@@ -18,7 +19,8 @@ import {
   providers: [
     HttpRoomReservationService,
     HttpRoomService,
-    HttpAppUserService]
+    HttpAppUserService,
+    AuthService]
 })
 export class RoomReservationComponent implements OnInit {
   roomRes: RoomReservations;
@@ -30,6 +32,8 @@ export class RoomReservationComponent implements OnInit {
 
   //id: string = "-1";
 
+  loadRoom: Room;
+
   roomResid: number;
   userId: number;
   roomId: number;
@@ -38,12 +42,23 @@ export class RoomReservationComponent implements OnInit {
 
   constructor(//private router: Router, private activatedRoute: ActivatedRoute,
   private httpRoomReservationService: HttpRoomReservationService,
+  private authService: AuthService,
     private httpRoomService: HttpRoomService, private httpAppUserService: HttpAppUserService) { 
        //activatedRoute.params.subscribe(params => {this.id = params["id"]});
     }
 
   ngOnInit() {
-    this.getAll();
+    if(this.isUser())
+      this.getAll();
+    else
+      this.getForOthers();
+  }
+
+  getForOthers(){
+    this.httpRoomReservationService.getRoomReservations().subscribe(
+      (rr: any) => { this.roomRess = rr; console.log(this.roomRess) },
+      error => { alert("Unsuccessful fetch operation!"); console.log(error); }
+    );
   }
 
   getAll() {
@@ -83,6 +98,10 @@ export class RoomReservationComponent implements OnInit {
     );
   }
 
+  isUser():boolean{
+    return this.authService.isUserAppUser();
+  }
+
   editRoomRes(): void {
     this.httpRoomReservationService.updateRoomRes(this.roomRes).subscribe(
       (ro: any) => { this.getAll() },
@@ -98,6 +117,14 @@ export class RoomReservationComponent implements OnInit {
     this.roomRes = rr;
   }
 
+  getRoom(roomId: number){
+    this.httpRoomService.getRoomById(roomId).subscribe(
+      (ro: any) => { this.loadRoom = ro; console.log(this.room) }
+    );
+  }
+  removeRoom(){
+    this.loadRoom = null;
+  }
   onPost(res: any): void {
     alert("Post!");
     console.log(res.json());

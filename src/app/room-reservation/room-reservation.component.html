@@ -13,15 +13,18 @@
                 <li *ngFor="let roomRes of roomRess">
                     <p>Start date: {{roomRes.StartDate}} </p>
                     <p>End date: {{roomRes.EndDate}}</p>
-                    <p>Room: {{roomRes.RoomId}}</p>
+                    <p on-mouseover='getRoom(roomRes.RoomId)' on-mouseleave='removeRoom()'>Room: {{roomRes.RoomId}}</p>
                     <div [hidden]="!errorMsg" class="errorMsg">
                         {{errorMsg}}
                     </div>
-                    <a role="button" (click)="setId(roomRes.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delRoomRessModal" aria-expanded="false"
+                     <div *ngIf="loadRoom != null">
+                        <app-room-detailed [room]="loadRoom"></app-room-detailed>
+                    </div>
+                    <a *ngIf="isUser()" role="button" (click)="setId(roomRes.Id)" aria-haspopup="true" data-toggle="modal" data-target="#delRoomRessModal" aria-expanded="false"
                         class="pull-right">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </a>
-                    <a role="button" (click)="setRoomRes(roomRes)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editRoomResModal"
+                    <a *ngIf="isUser()" role="button" (click)="setRoomRes(roomRes)" aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#editRoomResModal"
                         class="pull-right">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a><br>
